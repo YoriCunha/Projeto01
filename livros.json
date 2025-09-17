@@ -1,0 +1,58 @@
+{
+    "1": {
+        "titulo": "Harry Potter e a Pedra Filosofal",
+        "autor": "J. K. Rowling",
+        "sinopse": "Harry Potter é um garoto cujos pais, feiticeiros, foram assassinados por um poderosíssimo bruxo quando ele ainda era um bebê. Ele foi levado, então, para a casa dos tios que nada tinham a ver com o sobrenatural. Pelo contrário. Até os 10 anos, Harry foi uma espécie de gata borralheira: maltratado pelos tios, herdava roupas velhas do primo gorducho, tinha óculos remendados e era tratado como um estorvo. No dia de seu aniversário de 11 anos, entretanto, ele parece deslizar por um buraco sem fundo, como o de Alice no país das maravilhas, que o conduz a um mundo mágico. Descobre sua verdadeira história e seu destino: ser um aprendiz de feiticeiro até o dia em que terá que enfrentar a pior força do mal, o homem que assassinou seus pais. O menino de olhos verde, magricela e desengonçado, tão habituado à rejeição, descobre, também, que é um herói no universo dos magos. Potter fica sabendo que é a única pessoa a ter sobrevivido a um ataque do tal bruxo do mal e essa é a causa da marca em forma de raio que ele carrega na testa. Ele não é um garoto qualquer, ele sequer é um feiticeiro qualquer ele é Harry Potter, símbolo de poder, resistência e um líder natural entre os sobrenaturais. A fábula, recheada de fantasmas, paredes que falam, caldeirões, sapos, unicórnios, dragões e gigantes, não é, entretanto, apenas um passatempo.",
+        "localizacao": "Prateleira A1 - Setor Fantasia",
+        "imagem": "img/livro1.png"
+    },
+    "2": {
+        "titulo": "As Crônicas de Nárnia",
+        "autor": "C. S. Lewis",
+        "sinopse": "Viagens ao fim do mundo, criaturas fantásticas e batalhas épicas entre o bem e o mal - o que mais um leitor poderia querer de um livro? O livro que tem tudo isso é 'O leão, a feiticeira e o guarda-roupa', escrito em 1949 por Clive Staples Lewis. MasLewis não parou por aí. Seis outros livros vieram depois e, juntos, ficaram conhecidos como 'As crônicas de Nárnia'. Nos últimos cinqüenta anos, 'As crônicas de Nárnia' transcenderam o gênero da fantasia para se tornar parte do cânone da literaturaclássica. Cada um dos sete livros é uma obra-prima, atraindo o leitor para um mundo em que a magia encontra a realidade, e o resultado é um mundo ficcional que tem fascinado gerações. Esta edição apresenta todas as sete crônicas integralmente, num único volume. Os livros são apresentados de acordo com a ordem de preferência de Lewis, cada capítulo com uma ilustração do artista original, Pauline Baynes. Enganosamente simples e direta, 'As crônicas de Nárnia' continuam cativando os leitores com aventuras, personagens e fatos que falam a pessoas de todas as idades.",
+        "localizacao": "Prateleira B1 - Setor Aventura",
+        "imagem": "img/livro2.jpg"
+    },
+    "3": {
+        "titulo": "O Hobbit",
+        "autor": "J. R. R. Tolkien",
+        "sinopse": "Bilbo Bolseiro era um dos mais respeitáveis hobbits de todo o Condado até que, um dia, o mago Gandalf bate à sua porta. A partir de então, toda sua vida pacata e campestre soprando anéis de fumaça com seu belo cachimbo começa a mudar. Ele é convocado a participar de uma aventura por ninguém menos do que Thorin Escudo-de-Carvalho, um príncipe do poderoso povo dos Anãos.",
+        "localizacao": "Prateleira A2 - Setor Fantasia",
+        "imagem": "img/livro3.jpg"
+    },
+    "4": {
+        "titulo": "Percy Jackson e o Ladrão de Raios",
+        "autor": "Rick Riordan",
+        "sinopse": "Nessa primeira aventura da série que conquistou fãs no mundo todo e deu a Riordan o título de “contador de histórias dos deuses”, conhecemos Percy Jackson, um garoto de 12 anos que está prestes a ser expulso do colégio interno. De novo. É a sexta vez que isso acontece. Percy tem que lidar com as consequências do transtorno do déficit de atenção e da dislexia, o que não torna sua vida lá muito fácil. Só que, ultimamente, criaturas fantásticas e os deuses do Monte Olimpo parecem estar saindo dos livros de mitologia grega do colégio para a realidade. Ao que tudo indica, tem um pessoal bem irritado com o pobre garoto.",
+        "localizacao": "Prateleira A2 - Setor Fantasia",
+        "imagem": "img/livro4.png"
+    },
+    "5": {
+        "titulo": "One Piece vol. 104",
+        "autor": "Eiichiro Oda",
+        "sinopse": "À medida que a batalha entre Luffy e Kaido entra na rodada final, todos em Wano colocam suas vidas em risco para proteger sua casa. Mas mesmo que Luffy consiga realmente garantir a vitória, haverá algo restante para um novo shogun governar?",
+        "localizacao": "Prateleira C5 - Setor Mangá",
+        "imagem": "img/livro7.png"
+    },
+    "6": {
+        "titulo": "A Arte da Guerra",
+        "autor": "Sun Tzu",
+        "sinopse": "O maior tratado de guerra de todos os tempos em sua versão completa em português. A Arte da Guerra é sem dúvida a Bíblia da estratégia, sendo hoje utilizada amplamente no mundo dos negócios, conquistando pessoas e mercados. Não nos surpreende vê-la citada em filmes como Wall Street (Oliver Stone, 1990) e constantemente aplicada para solucionar os mais recentes conflitos do nosso dia-a-dia. Conheça um dos maiores ícones da estratégia dos últimos 2500 anos. Nesta versão de luxo de 160 páginas, o livro está formato 15,3X23, papel de alta qualidade. No final da edição o leitor tem 3 espaços com 23 páginas para fazer suas anotações sobre aplicabilidades dos ensinamentos de Sun Tzu na vida pessoal, profissional, e nos estudos. Sunzi disse: “A guerra se baseia no engano, se faz pelo ganho e se adapta pela divisão e combinação.” “Tal como a água procura as profundezas e evita os cumes, um exército ataca o vazio e evita o cheio. A água se move de acordo com a terra; um exército se movimenta de acordo com o inimigo.” “Quando o general é fraco, sem autoridade junto aos soldados, suas regras são confusas e sua moral é baixa, o exército é confuso.”",
+        "localizacao": "Prateleira B1 - Setor Gestão",
+        "imagem": "img/livro5.jpg"
+    },
+    "7": {
+        "titulo": "Bleach Remix vol. 12",
+        "autor": "Tite Kubo",
+        "sinopse": "O confronto entre Ichigo e os Espadas! A colisão entre a transformação em hollow e a Resurrección!!Ichigo parte para Hueco Mundo a fim de resgatar Orihime. Quem entra em seu caminho é um dos Espadas, Ulquiorra. Grimmjow, o rei pantera, também cerca Ichigo. Qual será o poder incomum que a “transformação em hollow” trará para a batalha?",
+        "localizacao": "Prateleira C5 - Setor Mangá",
+        "imagem": "img/livro8.png"
+    },
+    "8": {
+        "titulo": "Assassin Creed: Renegado",
+        "autor": "Oliver Bowden",
+        "sinopse": "A vingança será escrita com aço. 1735. Londres. Haytham Kenway foi ensinado a lutar assim que se tornou capaz de empunhar uma espada. Quando a propriedade da família é atacada ― o pai assassinado e a irmã raptada ―, Haytham defende seu lar da única maneira que pode: com sangue. Sem família, o menino é treinado por um misterioso tutor que o transforma num assassino mortal. Em Assassins’s Creed: Renegado, Haytham, consumido pela sede de vingança, começa sua jornada em busca de retaliação. Para alcançar seus objetivos, precisará colocar em prática suas habilidades em meio ao caos do campo de batalha, não confiando em ninguém e questionando tudo que aprendeu até então. Conspiração e traição o cercam a cada passo enquanto a luta entre a Irmandade dos Assassinos e a Ordem dos Cavaleiros Templários chega à Guerra de Independência dos Estados Unidos. Uma fábula sobre guerra e heroísmo, uma história sobre sacrifício, identidade e lealdade.?",
+        "localizacao": "Prateleira B1 - Setor Aventura",
+        "imagem": "img/livro6.jpg"
+    }
+}
