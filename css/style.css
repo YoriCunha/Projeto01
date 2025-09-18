@@ -45,9 +45,8 @@ body {
     position: fixed;
     top: 15%;
     left: -280px;
-    /* escondido fora da tela */
     width: 280px;
-    height: 60%;
+    height: 40rem;
     background: #f8f9fa;
     box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.2);
     border-radius: 0 12px 12px 0;
@@ -123,34 +122,14 @@ body {
 
 .sellcard a {
     text-decoration: none;
-    color: inherit;
+    color: inherit
 }
 
-.capa {
-    width: 18rem;
-    height: 25rem;
-    border-radius: 5px;
-    margin-right: 2rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.596);
-}
-
-.synopsis-box {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 15px;
-    background: #fafafa;
-}
-
-.synopsis-box h6 {
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.offcanvas {
-    color: white;
-    padding-left: 1rem;
-    background-color: transparent;
-    backdrop-filter: blur(10px);
+.sellcard p{
+    margin-top: 0.5rem;
+    font-size: 0.8rem; 
+    font-family: Lexend Deca, serif;
+    color: gray;
 }
 
 .navbar {
@@ -171,19 +150,7 @@ body {
     margin: 0.5vh;
 }
 
-.cadastro {
-    display: flex;
-    justify-content: center;
-    justify-self: center;
-    width: 50vw;
-    margin-top: 5rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem; 
-    padding: 2rem;
-}
-form{
-    width: 50vw;
-}
+
 
 @media screen and (max-width: 320px) {
     .container {
@@ -203,6 +170,142 @@ form{
         margin-left: 0;
         margin-top: 2vh;
         flex-wrap: wrap;
+    }
+
+}
+@media screen and (max-width: 1370px) {
+    #btnFiltrar {
+        position: fixed;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 35px;
+        height: 60px;
+        border: none;
+        background: #0d6efd;
+        color: white;
+        font-size: 1.5rem;
+        border-radius: 0 10px 10px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        z-index: 1001;
+    }
+    
+    #btnFiltrar:hover {
+        background: #0b5ed7;
+    }
+    
+    /* Sidebar custom */
+    .sidebar {
+        position: fixed;
+        top: 15%;
+        left: -280px;
+        width: 280px;
+        height: 30rem;
+        background: #f8f9fa;
+        box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.2);
+        border-radius: 0 12px 12px 0;
+        display: flex;
+        flex-direction: column;
+        transition: left 0.3s ease;
+        z-index: 1000;
+    }
+    
+    .sidebar.ativo {
+        left: 0;
+        /* aparece */
+    }
+    
+    /* Cabeçalho fixo */
+    .sidebar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+        border-bottom: 1px solid #ddd;
+        background: #fff;
+        border-radius: 0 12px 0 0;
+        flex-shrink: 0;
+    }
+    
+    .sidebar-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+    }
+    
+    .sidebar-header button {
+        background: none;
+        border: none;
+        font-size: 0.9rem;
+        cursor: pointer;
+    }
+    
+    /* Conteúdo rolável */
+    .sidebar-body {
+        padding: 1rem;
+        overflow-y: hidden;
+    }
+    
+    .filtro-grupo {
+        margin-bottom: 20px;
+    }
+    
+    .filtro-grupo p {
+        font-weight: bold;
+        margin-bottom: 0.2rem;
+    }
+    
+    .filtro-grupo label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 0.9rem;
+    }
+    
+    .sellcard {
+        width: 50%;
+        margin: 1rem;
+        padding: 1.5rem;
+        border-radius: 0.3rem;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.411);
+    }
+    
+    .sellcard img {
+        width: 100%;
+        height: 20rem;
+        margin: auto;
+    }
+    
+    .sellcard a {
+        text-decoration: none;
+        color: inherit
+    }
+    
+    .sellcard p{
+        margin-top: 0.5rem;
+        font-size: 0.8rem; 
+        font-family: Lexend Deca, serif;
+        color: gray;
+    }
+    
+    .navbar {
+        font-family: 'Alice', serif;
+        padding: 1.15rem 1.5rem;
+    }
+    
+    .navbar-title {
+        font-size: 2rem;
+    }
+    
+    .tela {
+        font-family: Lexend Deca, serif;
+    }
+    
+    .tela label {
+        font-size: 0.9rem;
+        margin: 0.5vh;
     }
 
 }
