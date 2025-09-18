@@ -20,7 +20,6 @@ body {
 
 .cadastro {
     display: flex;
-    justify-content: center;
     justify-self: center;
     width: 50vw;
     margin-top: 5rem;
@@ -28,8 +27,17 @@ body {
     border-radius: 0.5rem; 
     padding: 2rem;
 }
+
 form{
     width: 50vw;
     font-family: Lexend Deca, sans-serif;
-    
+}
+
+form label{
+    font-size: 1.2rem;
+}
+
+form input::placeholder{
+    font-size: 0.9rem;
+
 }
