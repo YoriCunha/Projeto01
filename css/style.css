@@ -54,6 +54,7 @@ body {
     flex-direction: column;
     transition: left 0.3s ease;
     z-index: 1000;
+    font-family: 'Lexend Deca', serif;
 }
 
 .sidebar.ativo {

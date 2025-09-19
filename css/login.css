@@ -23,16 +23,17 @@ body {
 }
 
 .login-title {
-    margin-bottom: 20px;
+    margin-bottom: 1.5rem;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 1.5rem;
     text-align: center;
 }
 
 .form-control {
-    border-radius: 20px;
+    border-radius: 2rem;
+    margin-bottom: 0.5rem;
 }
 
 .btn-primary {
-    border-radius: 20px;
+    border-radius: 2rem;
 }

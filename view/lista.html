@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/3ab4c965c5.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="../css/lista.css">
+    <title>Modal de Cadastro</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand border-bottom"
+        style="padding: 0.5rem 1rem; background-color: #fff; box-shadow: 0 5px 4px rgba(0,0,0,.25);">
+        <div class="w-100 d-flex align-items-center justify-content-center position-relative">
+
+            <!-- título central -->
+            <a class="navbar-brand navbar-title mx-auto" href="#">Livros</a>
+
+            <!-- ícone de usuário -->
+            <div class="position-absolute" style="right: 0;">
+                <a href="login.html" class="nav-link p-0">
+                    <i class="bi- bi-person-circle" style="font-size: 1.5rem; color: #333;"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!-- Botão para abrir modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastroModal">
+        Novo Cadastro
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="cadastroModal" tabindex="-1" aria-labelledby="cadastroModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <!-- Cabeçalho -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cadastroModalLabel">Cadastro de Livro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+
+                <!-- Corpo do Modal -->
+                <div class="modal-body">
+                    <form id="formCadastro">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="titulo" class="form-label">Título</label>
+                                <input type="text" class="form-control" id="titulo" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="quantidade" class="form-label">Quantidade</label>
+                                <input type="number" class="form-control" id="quantidade" required min="1">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="dataCadastro" class="form-label">Data de Cadastro</label>
+                                <input type="date" class="form-control" id="dataCadastro" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="autor" class="form-label">Autor</label>
+                                <input type="text" class="form-control" id="autor" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editora" class="form-label">Editora</label>
+                                <input type="text" class="form-control" id="editora">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="isbn" class="form-label">ISBN</label>
+                            <input type="text" class="form-control" id="isbn">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="observacoes" class="form-label">Observações</label>
+                            <textarea class="form-control" id="observacoes" rows="3" style="resize: none;"></textarea>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Rodapé -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" form="formCadastro">Salvar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

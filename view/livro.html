@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/3ab4c965c5.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-    <link rel="stylesheet" href="css/livro.css">
+    <link rel="stylesheet" href="../css/livro.css">
     <title>Book Finder</title>
 </head>
 
@@ -55,7 +55,7 @@
         const id = params.get("id");
 
         // Busca o JSON com os livros
-        fetch("livros.json")
+        fetch("../json/livros.json")
             .then(res => res.json())
             .then(livros => {
                 if (livros[id]) {
