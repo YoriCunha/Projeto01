@@ -19,7 +19,7 @@ const displayData = (dataToDisplay) => {
         const card = document.createElement("div");
         card.classList.add("sellcard");
         card.innerHTML = `
-            <a href="livro.html?id=${e.id}" style="text-decoration: none; color: inherit;">
+            <a href="view/livro.html?id=${e.id}" style="text-decoration: none; color: inherit;">
                 <img src="${e.imagem}" alt="Capa do Livro">
                 <p>${e.nome}</p>
                 <p>${e.autor}</p>
