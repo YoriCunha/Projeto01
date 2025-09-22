@@ -7,14 +7,15 @@ body {
     margin: 0;
     padding: 0;
     z-index: 1;
-    font-family: "Lexend Deca";
 }
+
 .container {
     display: flex;
     justify-content: center;
     margin-top: 5vh;
     gap: 10px;
 }
+
 .navbar {
     font-family: 'Alice', serif;
     padding: 1.15rem 1.5rem;

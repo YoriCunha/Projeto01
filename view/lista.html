@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/3ab4c965c5.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link rel="stylesheet" href="../css/lista.css">
+    <link rel="icon" href="../img/book.png">
     <title>Lista de Livros</title>
 </head>
 
@@ -17,7 +18,11 @@
         style="padding: 0.5rem 1rem; background-color: #fff; box-shadow: 0 5px 4px rgba(0,0,0,.25);">
         <div class="w-100 d-flex align-items-center justify-content-center position-relative">
 
-            <a class="navbar-brand navbar-title mx-auto">Livros</a>
+            <a class="navbar-brand navbar-title mx-auto" href="/index.html">Book Finder</a>
+
+            <div class="botao position-absolute" style="right: 0; width: 13rem;">
+                <a href="../view/emprestimo.html" class="nav-link p-0 text-center">Emprestimo/Devoluções</a>
+            </div>
 
             <div class="position-absolute" style="right: 0;">
                 <a href="../view/login.html" class="nav-link p-0">
@@ -28,17 +33,20 @@
     </nav>
 
     <div class="box" style="display: flex; gap: 1rem; margin: 2rem;">
+        <!-- SIDEBAR DE FILTROS -->
         <div class="box-content"
-            style="width: 15rem; height: auto; background: transparent; border: 1px solid #ccc; border-radius: 8px; padding: 2rem;">
+            style="width: 15rem; background: transparent; border: 1px solid #ccc; border-radius: 8px; padding: 2rem;">
             <div class="sidebar-header">
                 <h3>Filtros</h3>
             </div>
-            <label><input type="checkbox" id="filtro2" name="filtro2"> Emprestados </label>
-            <label><input type="checkbox" id="filtro1" name="filtro1"> Devolução </label>
-            <label><input type="checkbox" id="filtro1" name="filtro1"> Disponíveis </label>
+            <label><input type="checkbox" id="filtroDevolucao"> Devolvidos</label><br>
+            <label><input type="checkbox" id="filtroEmprestados"> Emprestados</label><br>
+            <label><input type="checkbox" id="filtroDisponiveis"> Disponíveis</label>
         </div>
+
+        <!-- TABELA -->
         <div class="table-responsive w-100"
-            style="border: 1px solid #ccc; border-radius: 1rem; margin-left: 5rem; margin-left: 5rem; margin-right: 5rem ;">
+            style="border: 1px solid #ccc; border-radius: 1rem; margin-left: 5rem; margin-right: 5rem;">
             <table class="table text-center" id="tabelaLivros">
                 <thead>
                     <tr>
@@ -54,23 +62,9 @@
                 </thead>
                 <tbody>
                     <!-- As linhas serão inseridas aqui -->
-                    <tr>
-                        <td>O Senhor dos Anéis</td>
-                        <td>5</td>
-                        <td>J.R.R. Tolkien</td>
-                        <td>HarperCollins</td>
-                        <td>29/07/2024 </td>
-                        <td>Disponível</td>
-                        <td>N/A</td>
-                        <td>
-                            <button class="btn btn-sm"><i class="fa fa-pencil"></i></button>
-                            <button class="btn btn-sm"><i class="fa fa-trash"></i></button>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
-
     </div>
 
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastroModal"
@@ -78,6 +72,7 @@
         Novo Cadastro
     </button>
 
+    <!-- MODAL -->
     <div class="modal fade" id="cadastroModal" tabindex="-1" aria-labelledby="cadastroModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -100,7 +95,7 @@
                             </div>
                             <div class="col-md-3">
                                 <label for="dataCadastro" class="form-label">Data de Cadastro</label>
-                                <input type="date" class="form-control" id="dataCadastro" required  pattern="^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$">
+                                <input type="date" class="form-control" id="dataCadastro" required>
                             </div>
                         </div>
 
@@ -141,13 +136,70 @@
         </div>
     </div>
 
+    <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const form = document.getElementById("formCadastro");
             const tabela = document.getElementById("tabelaLivros").querySelector("tbody");
-            let linhaEditando = null; // Guarda a linha que está sendo editada
 
+            // Checkboxes de filtros
+            const filtroEmprestados = document.getElementById("filtroEmprestados");
+            const filtroDevolucao = document.getElementById("filtroDevolucao");
+            const filtroDisponiveis = document.getElementById("filtroDisponiveis");
+
+            let linhaEditando = null;
+            let livros = JSON.parse(localStorage.getItem("livros")) || [];
+
+            // Converter data yyyy-mm-dd → dd/mm/yyyy
+            function formatarData(dataISO) {
+                if (!dataISO) return "";
+                const [ano, mes, dia] = dataISO.split("-");
+                return `${dia}/${mes}/${ano}`;
+            }
+
+            // Filtragem
+            function aplicarFiltros(lista) {
+                let filtrados = lista;
+
+                const filtrosAtivos = [];
+                if (filtroEmprestados.checked) filtrosAtivos.push("Emprestado");
+                if (filtroDevolucao.checked) filtrosAtivos.push("Devolvido");
+                if (filtroDisponiveis.checked) filtrosAtivos.push("Disponível");
+
+                if (filtrosAtivos.length > 0) {
+                    filtrados = lista.filter(livro => filtrosAtivos.includes(livro.situacao));
+                }
+
+                return filtrados;
+            }
+
+            // Renderizar tabela
+            function renderTabela() {
+                tabela.innerHTML = "";
+                const listaFiltrada = aplicarFiltros(livros);
+
+                listaFiltrada.forEach((livro, index) => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+            <td>${livro.titulo}</td>
+            <td>${livro.quantidade}</td>
+            <td>${livro.autor}</td>
+            <td>${livro.editora}</td>
+            <td>${livro.dataCadastro}</td>
+            <td>${livro.situacao}</td>
+            <td>${livro.observacoes}</td>
+            <td>
+              <button class="btn btn-sm btn-editar" data-index="${index}"><i class="fa fa-pencil"></i></button>
+              <button class="btn btn-sm btn-excluir" data-index="${index}"><i class="fa fa-trash"></i></button>
+            </td>
+          `;
+                    tabela.appendChild(tr);
+                });
+                localStorage.setItem("livros", JSON.stringify(livros));
+            }
+
+            // Adicionar - Editar livro
             form.addEventListener("submit", function (e) {
                 e.preventDefault();
 
@@ -155,77 +207,62 @@
                 const quantidade = document.getElementById("quantidade").value;
                 const autor = document.getElementById("autor").value;
                 const editora = document.getElementById("editora").value;
-                const dataCadastro = document.getElementById("dataCadastro").value;
+                const dataCadastroISO = document.getElementById("dataCadastro").value;
+                const dataCadastro = formatarData(dataCadastroISO);
                 const situacao = document.getElementById("situacao").value;
                 const observacoes = document.getElementById("observacoes").value.trim() || "N/A";
 
-                if (linhaEditando) {
-                    // Atualiza linha existente (sem perder os botões)
-                    linhaEditando.innerHTML = `
-                    <td>${titulo}</td>
-                    <td>${quantidade}</td>
-                    <td>${autor}</td>
-                    <td>${editora}</td>
-                    <td>${dataCadastro}</td>
-                    <td>${situacao}</td>
-                    <td>${observacoes}</td>
-                    <td>
-                        <button class="btn btn-sm btn-editar"><i class="fa fa-pencil"></i></button>
-                        <button class="btn btn-sm btn-excluir"><i class="fa fa-trash"></i></button>
-                    </td>
-                `;
-                    linhaEditando = null; // Limpa edição
+                const livro = { titulo, quantidade, autor, editora, dataCadastro, situacao, observacoes };
+
+                if (linhaEditando !== null) {
+                    livros[linhaEditando] = livro;
+                    linhaEditando = null;
                 } else {
-                    // Cria nova linha
-                    const novaLinha = document.createElement("tr");
-                    novaLinha.innerHTML = `
-                    <td>${titulo}</td>
-                    <td>${quantidade}</td>
-                    <td>${autor}</td>
-                    <td>${editora}</td>
-                    <td>${dataCadastro}</td>
-                    <td>${situacao}</td>
-                    <td>${observacoes}</td>
-                    <td>
-                        <button class="btn btn-sm btn-editar"><i class="fa fa-pencil"></i></button>
-                        <button class="btn btn-sm btn-excluir"><i class="fa fa-trash"></i></button>
-                    </td>
-                `;
-                    tabela.appendChild(novaLinha);
+                    livros.push(livro);
                 }
 
+                renderTabela();
                 form.reset();
-                const modal = bootstrap.Modal.getInstance(document.getElementById("cadastroModal"));
-                modal.hide();
+                bootstrap.Modal.getInstance(document.getElementById("cadastroModal")).hide();
             });
 
-            // Delegação de eventos para botões dinâmicos
+            // Editar - Excluir
             tabela.addEventListener("click", function (e) {
                 const target = e.target.closest("button");
                 if (!target) return;
 
-                const linha = target.closest("tr");
+                const index = target.getAttribute("data-index");
 
                 if (target.classList.contains("btn-excluir")) {
-                    linha.remove();
+                    livros.splice(index, 1);
+                    renderTabela();
                 }
 
                 if (target.classList.contains("btn-editar")) {
-                    linhaEditando = linha;
+                    const livro = livros[index];
+                    document.getElementById("titulo").value = livro.titulo;
+                    document.getElementById("quantidade").value = livro.quantidade;
+                    document.getElementById("autor").value = livro.autor;
+                    document.getElementById("editora").value = livro.editora;
 
-                    const cells = linha.children;
-                    document.getElementById("titulo").value = cells[0].textContent;
-                    document.getElementById("quantidade").value = cells[1].textContent;
-                    document.getElementById("autor").value = cells[2].textContent;
-                    document.getElementById("editora").value = cells[3].textContent;
-                    document.getElementById("dataCadastro").value = cells[4].textContent;
-                    document.getElementById("situacao").value = cells[5].textContent;
-                    document.getElementById("observacoes").value = cells[6].textContent;
+                    const [dia, mes, ano] = livro.dataCadastro.split("/");
+                    document.getElementById("dataCadastro").value = `${ano}-${mes}-${dia}`;
 
-                    const modal = new bootstrap.Modal(document.getElementById("cadastroModal"));
-                    modal.show();
+                    document.getElementById("situacao").value = livro.situacao;
+                    document.getElementById("observacoes").value = livro.observacoes;
+
+                    linhaEditando = index;
+                    new bootstrap.Modal(document.getElementById("cadastroModal")).show();
                 }
             });
+
+            // Eventos dos filtros
+            [filtroEmprestados, filtroDevolucao, filtroDisponiveis].forEach(filtro => {
+                filtro.addEventListener("change", renderTabela);
+            });
+
+            // Inicializa tabela
+            renderTabela();
         });
     </script>
 </body>
