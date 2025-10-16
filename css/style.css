@@ -58,7 +58,7 @@ body {
 /* Sidebar */
 .sidebar {
     position: fixed;
-    top: 16rem;
+    top: 15rem;
     left: -280px;
     width: 280px;
     height: 30rem;
