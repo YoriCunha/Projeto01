@@ -12,5 +12,7 @@ if (isset($_POST['savebook'])) {
     $titulo = mysqli_real_escape_string($conexao, trim($_POST['obs']));
 
     $sql = "INSERT INTO livros (titulo, qtd, autor, editora, data_pub, situacao, observacao) VALUES ('$titulo', '$qtd', '$autor', '$editora', '$data', '$situacao', '$obs')";
+
+    mysqli_query($conexao, $sql);
 }
 ?>
