@@ -1,12 +1,12 @@
 const data = [
-    { id: 1, imagem: "img/livro1.png", nome: "Harry Potter e a Pedra Filosofal", autor: "J. K. Rowling", genero: "Fantasia", faixa: "Juvenil" },
-    { id: 2, imagem: "img/livro2.jpg", nome: "As Crônicas de Nárnia", autor: "C. S. Lewis", genero: "Aventura", faixa: "Juvenil" },
-    { id: 3, imagem: "img/livro3.png", nome: "One Piece vol. 104", autor: "Eiichiro Oda", genero: "Mangá", faixa: "Juvenil" },
-    { id: 4, imagem: "img/livro4.jpg", nome: "Harry Potter e a Ordem da Fênix", autor: "J. K. Rowling", genero: "Fantasia", faixa: "Juvenil" },
-    { id: 5, imagem: "img/livro5.png", nome: "Bleach Remix vol. 12", autor: "Tite Kubo", genero: "Mangá", faixa: "Juvenil" },
-    { id: 6, imagem: "img/livro6.png", nome: "Cartas de um Diabo a seu Aprendiz", autor: "C. S. Lewis", genero: "Fantasia", faixa: "Adulto" },
-    { id: 7, imagem: "img/livro7.jpg", nome: "Bleach vol. 49", autor: "Tite Kubo", genero: "Mangá", faixa: "Adulto" },
-    { id: 8, imagem: "img/livro8.jpg", nome: "Berserk vol. 1", autor: "Kentaro Miura", genero: "Mangá", faixa: "Adulto" }
+    { id: 1, imagem: "../img/livro1.png", nome: "Harry Potter e a Pedra Filosofal", autor: "J. K. Rowling", genero: "Fantasia", faixa: "Juvenil" },
+    { id: 2, imagem: "../img/livro2.jpg", nome: "As Crônicas de Nárnia", autor: "C. S. Lewis", genero: "Aventura", faixa: "Juvenil" },
+    { id: 3, imagem: "../img/livro3.png", nome: "One Piece vol. 104", autor: "Eiichiro Oda", genero: "Mangá", faixa: "Juvenil" },
+    { id: 4, imagem: "../img/livro4.jpg", nome: "Harry Potter e a Ordem da Fênix", autor: "J. K. Rowling", genero: "Fantasia", faixa: "Juvenil" },
+    { id: 5, imagem: "../img/livro5.png", nome: "Bleach Remix vol. 12", autor: "Tite Kubo", genero: "Mangá", faixa: "Juvenil" },
+    { id: 6, imagem: "../img/livro6.png", nome: "Cartas de um Diabo a seu Aprendiz", autor: "C. S. Lewis", genero: "Fantasia", faixa: "Adulto" },
+    { id: 7, imagem: "../img/livro7.jpg", nome: "Bleach vol. 49", autor: "Tite Kubo", genero: "Mangá", faixa: "Adulto" },
+    { id: 8, imagem: "../img/livro8.jpg", nome: "Berserk vol. 1", autor: "Kentaro Miura", genero: "Mangá", faixa: "Adulto" }
 ];
 
 const cardContainer = document.getElementById("card-grid");
