@@ -18,10 +18,10 @@
         style="padding: 0.5rem 1rem; background-color: #fff; box-shadow: 0 5px 4px rgba(0,0,0,.25);">
         <div class="w-100 d-flex align-items-center justify-content-center position-relative">
 
-            <a class="navbar-brand navbar-title mx-auto position-relative" href="pag-clt.html">Book Finder</a>
+            <a class="navbar-brand navbar-title mx-auto position-relative" href="pag-clt.php">Book Finder</a>
 
             <div class="botao position-absolute" style="right: 0;">
-                <a href="../view/lista.html" class="nav-link p-0 text-center">Cadastro</a>
+                <a href="../view/lista.php" class="nav-link p-0 text-center">Cadastro</a>
             </div>
 
             <div class="position-absolute" style="right: 0;">

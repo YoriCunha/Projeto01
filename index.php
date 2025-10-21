@@ -1,5 +1,5 @@
 <?php
-require 'conexao.php';
+require '../backend/conexao.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -24,7 +24,7 @@ require 'conexao.php';
             <a class="navbar-brand navbar-title" href="#"> Book Finder </a>
 
             <div class="d-flex gap-3 align-items-center">
-                <a href="view/login.html" class="nav-link p-0">
+                <a href="view/login.php" class="nav-link p-0">
                     <i class="fa fa-user-circle" style="font-size: 2rem; color: #333;"></i>
                 </a>
             </div>

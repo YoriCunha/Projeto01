@@ -21,9 +21,9 @@
             <a class="navbar-brand navbar-title" href="#">Book Finder</a>
 
             <div class="d-flex gap-3 align-items-center">
-                <a href="../view/lista.html" class="btn btn-m" style="background-color:  #8d8d8db2;">Cadastro</a>
-                <a href="../view/emprestimo.html" class="btn btn-m" style="background-color:  #8d8d8db2;">Empréstimo/Devoluções</a>
-                <a href="../view/login.html" class="nav-link p-0">
+                <a href="../view/lista.php" class="btn btn-m" style="background-color:  #8d8d8db2;">Cadastro</a>
+                <a href="../view/emprestimo.php" class="btn btn-m" style="background-color:  #8d8d8db2;">Empréstimo/Devoluções</a>
+                <a href="../view/login.php" class="nav-link p-0">
                     <i class="fa fa-user-circle" style="font-size: 2rem; color: #333;"></i>
                 </a>
             </div>

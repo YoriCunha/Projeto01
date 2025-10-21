@@ -18,10 +18,10 @@
         style="padding: 0.5rem 1rem; background-color: #fff; box-shadow: 0 5px 4px rgba(0,0,0,.25);">
         <div class="w-100 d-flex align-items-center justify-content-center position-relative">
 
-            <a class="navbar-brand navbar-title mx-auto" href="/index.php">Book Finder</a>
+            <a class="navbar-brand navbar-title mx-auto" href="pag-clt.php">Book Finder</a>
 
             <div class="botao position-absolute" style="right: 0; width: 13rem;">
-                <a href="../view/emprestimo.html" class="nav-link p-0 text-center">Emprestimo/Devoluções</a>
+                <a href="../view/emprestimo.php" class="nav-link p-0 text-center">Emprestimo/Devoluções</a>
             </div>
 
             <div class="position-absolute" style="right: 0;">
@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form id="formCadastro" action="../acoes.php" method="POST">
+                    <form id="formCadastro" action="../backend/acoes.php" method="POST">
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="titulo" class="form-label">Título</label>
@@ -112,17 +112,29 @@
 
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="situacao" class="form-label">Situação</label>
-                                <select class="form-select" id="situacao" name="situacao" required>
-                                    <option value="Disponível">Disponível</option>
-                                    <option value="Emprestado">Emprestado</option>
-                                    <option value="Devolvido">Devolvido</option>
-                                </select>
-                            </div>
+                                    <label for="situacao" class="form-label">Gênero</label>
+                                    <select class="form-select" id="genero" name="genero" required>  
+                                        <option value="Aventura">Aventura</option>
+                                        <option value="Mangá">Mangá</option>
+                                        <option value="Fantasisa">Fantasia</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="situacao" class="form-label">Situação</label>
+                                    <select class="form-select" id="situacao" name="situacao" required>
+                                        <option value="Disponível">Disponível</option>
+                                        <option value="Emprestado">Emprestado</option>
+                                        <option value="Devolvido">Devolvido</option>
+                                    </select>
+                                </div>  
                         </div>
                         <div class="mb-3">
                             <label for="observacoes" class="form-label">Observações</label>
                             <textarea class="form-control" id="observacoes" rows="3" style="resize: none;" name="observacoes"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sinopse" class="form-label">Sinópse</label>
+                            <textarea class="form-control" id="sinopse" rows="3" style="resize: none;" name="sinopse"></textarea>
                         </div>
                     </form>
                 </div>

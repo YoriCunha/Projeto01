@@ -44,7 +44,7 @@
 
             if (usuario === "adm" && senha === "123") {
                 localStorage.setItem("usuarioLogado", usuario);
-                window.location.href = "pag-clt.html";
+                window.location.href = "pag-clt.php";
             } else {
                 alert("Usuário ou senha incorretos!");
             }
