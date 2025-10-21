@@ -18,7 +18,7 @@
         style="padding: 0.5rem 1rem; background-color: #fff; box-shadow: 0 5px 4px rgba(0,0,0,.25);">
         <div class="w-100 d-flex align-items-center justify-content-center position-relative">
 
-            <a class="navbar-brand navbar-title mx-auto" href="/index.html">Book Finder</a>
+            <a class="navbar-brand navbar-title mx-auto" href="/index.php">Book Finder</a>
 
             <div class="botao position-absolute" style="right: 0; width: 13rem;">
                 <a href="../view/emprestimo.html" class="nav-link p-0 text-center">Emprestimo/Devoluções</a>
@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form id="formCadastro" action="acoes.php" method="POST">
+                    <form id="formCadastro" action="../acoes.php" method="POST">
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="titulo" class="form-label">Título</label>
@@ -138,132 +138,7 @@
 
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const form = document.getElementById("formCadastro");
-            const tabela = document.getElementById("tabelaLivros").querySelector("tbody");
-
-            // Checkboxes de filtros
-            const filtroEmprestados = document.getElementById("filtroEmprestados");
-            const filtroDevolucao = document.getElementById("filtroDevolucao");
-            const filtroDisponiveis = document.getElementById("filtroDisponiveis");
-
-            let linhaEditando = null;
-            let livros = JSON.parse(localStorage.getItem("livros")) || [];
-
-            // Converter data yyyy-mm-dd → dd/mm/yyyy
-            function formatarData(dataISO) {
-                if (!dataISO) return "";
-                const [ano, mes, dia] = dataISO.split("-");
-                return `${dia}/${mes}/${ano}`;
-            }
-
-            // Filtragem
-            function aplicarFiltros(lista) {
-                let filtrados = lista;
-
-                const filtrosAtivos = [];
-                if (filtroEmprestados.checked) filtrosAtivos.push("Emprestado");
-                if (filtroDevolucao.checked) filtrosAtivos.push("Devolvido");
-                if (filtroDisponiveis.checked) filtrosAtivos.push("Disponível");
-
-                if (filtrosAtivos.length > 0) {
-                    filtrados = lista.filter(livro => filtrosAtivos.includes(livro.situacao));
-                }
-
-                return filtrados;
-            }
-
-        //     // Renderizar tabela
-        //     function renderTabela() {
-        //         tabela.innerHTML = "";
-        //         const listaFiltrada = aplicarFiltros(livros);
-
-        //         listaFiltrada.forEach((livro, index) => {
-        //             const tr = document.createElement("tr");
-        //             tr.innerHTML = `
-        //     <td>${livro.titulo}</td>
-        //     <td>${livro.quantidade}</td>
-        //     <td>${livro.autor}</td>
-        //     <td>${livro.editora}</td>
-        //     <td>${livro.dataCadastro}</td>
-        //     <td>${livro.situacao}</td>
-        //     <td>${livro.observacoes}</td>
-        //     <td>
-        //       <button class="btn btn-sm btn-editar" data-index="${index}"><i class="fa fa-pencil"></i></button>
-        //       <button class="btn btn-sm btn-excluir" data-index="${index}"><i class="fa fa-trash"></i></button>
-        //     </td>
-        //   `;
-        //             tabela.appendChild(tr);
-        //         });    
-        //     }
-
-            // Adicionar - Editar livro
-            form.addEventListener("submit", function (e) {
-                e.preventDefault();
-
-                const titulo = document.getElementById("titulo").value;
-                const quantidade = document.getElementById("quantidade").value;
-                const autor = document.getElementById("autor").value;
-                const editora = document.getElementById("editora").value;
-                const dataCadastroISO = document.getElementById("dataCadastro").value;
-                const dataCadastro = formatarData(dataCadastroISO);
-                const situacao = document.getElementById("situacao").value;
-                const observacoes = document.getElementById("observacoes").value.trim() || "N/A";
-
-                const livro = { titulo, quantidade, autor, editora, dataCadastro, situacao, observacoes };
-
-                if (linhaEditando !== null) {
-                    livros[linhaEditando] = livro;
-                    linhaEditando = null;
-                } else {
-                    livros.push(livro);
-                }
-
-                renderTabela();
-                form.reset();
-                bootstrap.Modal.getInstance(document.getElementById("cadastroModal")).hide();
-            });
-
-            // Editar - Excluir
-            tabela.addEventListener("click", function (e) {
-                const target = e.target.closest("button");
-                if (!target) return;
-
-                const index = target.getAttribute("data-index");
-
-                if (target.classList.contains("btn-excluir")) {
-                    livros.splice(index, 1);
-                    renderTabela();
-                }
-
-                if (target.classList.contains("btn-editar")) {
-                    const livro = livros[index];
-                    document.getElementById("titulo").value = livro.titulo;
-                    document.getElementById("quantidade").value = livro.quantidade;
-                    document.getElementById("autor").value = livro.autor;
-                    document.getElementById("editora").value = livro.editora;
-
-                    const [dia, mes, ano] = livro.dataCadastro.split("/");
-                    document.getElementById("dataCadastro").value = `${ano}-${mes}-${dia}`;
-
-                    document.getElementById("situacao").value = livro.situacao;
-                    document.getElementById("observacoes").value = livro.observacoes;
-
-                    linhaEditando = index;
-                    new bootstrap.Modal(document.getElementById("cadastroModal")).show();
-                }
-            });
-
-            // Eventos dos filtros
-            [filtroEmprestados, filtroDevolucao, filtroDisponiveis].forEach(filtro => {
-                filtro.addEventListener("change", renderTabela);
-            });
-
-            // Inicializa tabela
-            renderTabela();
-        });
-    </script>
+    
 </body>
 
 </html>

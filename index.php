@@ -21,7 +21,7 @@ require 'conexao.php';
     <!-- Navbar -->
     <nav class="navbar navbar-expand border-bottom">
         <div class="container-fluid d-flex justify-content-between align-items-center">
-            <a class="navbar-brand navbar-title" href="#">Book Finder</a>
+            <a class="navbar-brand navbar-title" href="#"> Book Finder </a>
 
             <div class="d-flex gap-3 align-items-center">
                 <a href="view/login.html" class="nav-link p-0">
