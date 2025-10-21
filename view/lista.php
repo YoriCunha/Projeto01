@@ -122,7 +122,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="observacoes" class="form-label">Observações</label>
-                            <textarea class="form-control" id="observacoes" rows="3" style="resize: none;" name="obs"></textarea>
+                            <textarea class="form-control" id="observacoes" rows="3" style="resize: none;" name="observacoes"></textarea>
                         </div>
                     </form>
                 </div>
@@ -174,30 +174,29 @@
                 return filtrados;
             }
 
-            // Renderizar tabela
-            function renderTabela() {
-                tabela.innerHTML = "";
-                const listaFiltrada = aplicarFiltros(livros);
+        //     // Renderizar tabela
+        //     function renderTabela() {
+        //         tabela.innerHTML = "";
+        //         const listaFiltrada = aplicarFiltros(livros);
 
-                listaFiltrada.forEach((livro, index) => {
-                    const tr = document.createElement("tr");
-                    tr.innerHTML = `
-            <td>${livro.titulo}</td>
-            <td>${livro.quantidade}</td>
-            <td>${livro.autor}</td>
-            <td>${livro.editora}</td>
-            <td>${livro.dataCadastro}</td>
-            <td>${livro.situacao}</td>
-            <td>${livro.observacoes}</td>
-            <td>
-              <button class="btn btn-sm btn-editar" data-index="${index}"><i class="fa fa-pencil"></i></button>
-              <button class="btn btn-sm btn-excluir" data-index="${index}"><i class="fa fa-trash"></i></button>
-            </td>
-          `;
-                    tabela.appendChild(tr);
-                });
-                localStorage.setItem("livros", JSON.stringify(livros));
-            }
+        //         listaFiltrada.forEach((livro, index) => {
+        //             const tr = document.createElement("tr");
+        //             tr.innerHTML = `
+        //     <td>${livro.titulo}</td>
+        //     <td>${livro.quantidade}</td>
+        //     <td>${livro.autor}</td>
+        //     <td>${livro.editora}</td>
+        //     <td>${livro.dataCadastro}</td>
+        //     <td>${livro.situacao}</td>
+        //     <td>${livro.observacoes}</td>
+        //     <td>
+        //       <button class="btn btn-sm btn-editar" data-index="${index}"><i class="fa fa-pencil"></i></button>
+        //       <button class="btn btn-sm btn-excluir" data-index="${index}"><i class="fa fa-trash"></i></button>
+        //     </td>
+        //   `;
+        //             tabela.appendChild(tr);
+        //         });    
+        //     }
 
             // Adicionar - Editar livro
             form.addEventListener("submit", function (e) {
