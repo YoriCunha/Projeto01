@@ -1,7 +1,7 @@
 <?php
-include ("../backend/conexao.php");
+include("../backend/conexao.php");
 
-$puxa = "SELECT titulo, quantidade, autor, editora, data_pub, situacao, observacao FROM livros";
+$puxa = "SELECT id_livro, titulo, quantidade, autor, editora, data_pub, situacao, observacao, genero, faixa, localizacao, sinopse FROM livros";
 $resultado = mysqli_query($conexao, $puxa);
 
 ?>
@@ -71,33 +71,32 @@ $resultado = mysqli_query($conexao, $puxa);
                     <!-- As linhas serão inseridas aqui -->
                 </tbody>
                 <?php
-                    if($resultado->num_rows > 0) {
-                        while($row = $resultado->fetch_assoc()) {
-                            echo "<tr>";
-                            echo "<td>" . $row['titulo'] . "</td>";
-                            echo "<td>" . $row['quantidade'] . "</td>";
-                            echo "<td>" . $row['autor'] . "</td>";
-                            echo "<td>" . $row['editora'] . "</td>";
-                            $data_formatada = date("d/m/Y", strtotime($row['data_pub']));
-                            echo "<td>" . $data_formatada . "</td>";
-                            echo "<td>" . $row['situacao'] . "</td>";
-                            if($row['observacao'] == "") {
-                                echo "<td>N/A</td>";
-                            }else{
-                                echo "<td>" . $row['observacao'] . "</td>";
-                            }
-                            echo "<td>
-                                    <button class='btn btn-sm btn-primary'>Editar</button>
-                                    <button class='btn btn-sm btn-danger'>Excluir</button>
-                                </td>";
-                            echo "</tr>";
+                if ($resultado->num_rows > 0) {
+                    while ($row = $resultado->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row['titulo'] . "</td>";
+                        echo "<td>" . $row['quantidade'] . "</td>";
+                        echo "<td>" . $row['autor'] . "</td>";
+                        echo "<td>" . $row['editora'] . "</td>";
+                        $data_formatada = date("d/m/Y", strtotime($row['data_pub']));
+                        echo "<td>" . $data_formatada . "</td>";
+                        echo "<td>" . $row['situacao'] . "</td>";
+                        if ($row['observacao'] == "") {
+                            echo "<td>N/A</td>";
+                        } else {
+                            echo "<td>" . $row['observacao'] . "</td>";
                         }
+                        echo "<td>
+                                <button 
+                                    class='btn btn-sm btn-primary editarBtn' data-bs-toggle='modal' data-bs-target='#editarModal'>Editar</button>
+                            </td>";
                     }
+                }
                 ?>
                 </tbody>
             </table>
         </div>
-        
+
     </div>
 
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastroModal"
@@ -145,46 +144,48 @@ $resultado = mysqli_query($conexao, $puxa);
 
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                    <label for="situacao" class="form-label">Gênero</label>
-                                    <select class="form-select" id="genero" name="genero" required>  
-                                        <option value="Aventura">Aventura</option>
-                                        <option value="Mangá">Mangá</option>
-                                        <option value="Fantasisa">Fantasia</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="situacao" class="form-label">Situação</label>
-                                    <select class="form-select" id="situacao" name="situacao" required>
-                                        <option value="Disponível">Disponível</option>
-                                        <option value="Emprestado">Emprestado</option>
-                                        <option value="Devolvido">Devolvido</option>
-                                    </select>
-                                </div>  
+                                <label for="situacao" class="form-label">Gênero</label>
+                                <select class="form-select" id="genero" name="genero" required>
+                                    <option value="Aventura">Aventura</option>
+                                    <option value="Mangá">Mangá</option>
+                                    <option value="Fantasisa">Fantasia</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="situacao" class="form-label">Situação</label>
+                                <select class="form-select" id="situacao" name="situacao" required>
+                                    <option value="Disponível">Disponível</option>
+                                    <option value="Emprestado">Emprestado</option>
+                                    <option value="Devolvido">Devolvido</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                    <label for="situacao" class="form-label">Faixa Etária</label>
-                                    <select class="form-select" id="faixa" name="faixa" required>  
-                                        <option value="Adulto">Adulto</option>
-                                        <option value="Juvenil">Juvenil</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="situacao" class="form-label">Localização</label>
-                                    <select class="form-select" id="local" name="local" required>  
-                                        <option value="SAventura"> Setor Aventura</option>
-                                        <option value="SMangá">Setor Mangá</option>
-                                        <option value="SFantasisa"> Setor Fantasia</option>
-                                    </select>
-                                </div>  
+                                <label for="situacao" class="form-label">Faixa Etária</label>
+                                <select class="form-select" id="faixa" name="faixa" required>
+                                    <option value="Adulto">Adulto</option>
+                                    <option value="Juvenil">Juvenil</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="situacao" class="form-label">Localização</label>
+                                <select class="form-select" id="local" name="local" required>
+                                    <option value="SAventura"> Setor Aventura</option>
+                                    <option value="SMangá">Setor Mangá</option>
+                                    <option value="SFantasisa"> Setor Fantasia</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="observacoes" class="form-label">Observações</label>
-                            <textarea class="form-control" id="observacoes" rows="3" style="resize: none;" name="observacoes"></textarea>
+                            <textarea class="form-control" id="observacoes" rows="3" style="resize: none;"
+                                name="observacoes"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="sinopse" class="form-label">Sinópse</label>
-                            <textarea class="form-control" id="sinopse" rows="3" style="resize: none;" name="sinopse"></textarea>
+                            <textarea class="form-control" id="sinopse" rows="3" style="resize: none;"
+                                name="sinopse"></textarea>
                         </div>
                     </form>
                 </div>
@@ -197,11 +198,106 @@ $resultado = mysqli_query($conexao, $puxa);
             </div>
         </div>
     </div>
-    
+
+    <!-- modal de edição -->
+
+    <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editarModalLabel">Editar Livro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="formEditar" action="" method="POST">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="titulo" class="form-label">Título</label>
+                                <input type="text" class="form-control" id="tituloEdit" name="titulo" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="quantidade" class="form-label">Quantidade</label>
+                                <input type="number" class="form-control" id="quantidadeEdit" name="qtd" required
+                                    min="1">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="dataCadastro" class="form-label">Data de Cadastro</label>
+                                <input type="date" class="form-control" id="dataCadastroEdit" name="data" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="autor" class="form-label">Autor</label>
+                                <input type="text" class="form-control" id="autorEdit" name="autor" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editora" class="form-label">Editora</label>
+                                <input type="text" class="form-control" id="editoraEdit" name="editora">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="situacao" class="form-label">Gênero</label>
+                                <select class="form-select" id="generoEdit" name="genero" required>
+                                    <option value="Aventura">Aventura</option>
+                                    <option value="Mangá">Mangá</option>
+                                    <option value="Fantasisa">Fantasia</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="situacao" class="form-label">Situação</label>
+                                <select class="form-select" id="situacaoEdit" name="situacao" required>
+                                    <option value="Disponível">Disponível</option>
+                                    <option value="Emprestado">Emprestado</option>
+                                    <option value="Devolvido">Devolvido</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="situacao" class="form-label">Faixa Etária</label>
+                                <select class="form-select" id="faixaEdit" name="faixa" required>
+                                    <option value="Adulto">Adulto</option>
+                                    <option value="Juvenil">Juvenil</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="situacao" class="form-label">Localização</label>
+                                <select class="form-select" id="localEdit" name="local" required>
+                                    <option value="SAventura"> Setor Aventura</option>
+                                    <option value="SMangá">Setor Mangá</option>
+                                    <option value="SFantasisa"> Setor Fantasia</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="observacoes" class="form-label">Observações</label>
+                            <textarea class="form-control" id="observacoesEdit" rows="3" style="resize: none;"
+                                name="observacoes"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sinopse" class="form-label">Sinópse</label>
+                            <textarea class="form-control" id="sinopseEdit" rows="3" style="resize: none;"
+                                name="sinopse"></textarea>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" form="formEditar" name="editbook">Salvar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
 </body>
 
 </html>

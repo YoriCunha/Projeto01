@@ -1,5 +1,5 @@
 <?php
-require '../backend/conexao.php';
+require 'backend/conexao.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
