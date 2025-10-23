@@ -12,9 +12,11 @@ if (isset($_POST['savebook'])) {
     $obs = mysqli_real_escape_string($conexao, trim($_POST['observacoes']));
     $sinopse = mysqli_real_escape_string($conexao, trim($_POST['sinopse']));
     $genero = mysqli_real_escape_string($conexao, trim($_POST['genero']));
+    $faixa = mysqli_real_escape_string($conexao, trim($_POST['faixa']));
+    $local = mysqli_real_escape_string($conexao, trim($_POST['local']));
 
-    $sql = "INSERT INTO livros (titulo, quantidade, data_pub, autor, editora, situacao, observacao, sinopse, genero) 
-            VALUES ('$titulo', '$qtd', '$date', '$autor', '$editora', '$situacao', '$obs', '$sinopse', '$genero')";
+    $sql = "INSERT INTO livros (titulo, quantidade, data_pub, autor, editora, situacao, observacao, faixa, localizacao, sinopse, genero) 
+            VALUES ('$titulo', '$qtd', '$date', '$autor', '$editora', '$situacao', '$obs', '$faixa', '$local', '$sinopse', '$genero')";
 
     mysqli_query($conexao, $sql);
 

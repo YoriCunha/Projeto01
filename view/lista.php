@@ -1,3 +1,10 @@
+<?php
+include ("../backend/conexao.php");
+
+$puxa = "SELECT titulo, quantidade, autor, editora, data_pub, situacao, observacao FROM livros";
+$resultado = mysqli_query($conexao, $puxa);
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -63,8 +70,34 @@
                 <tbody>
                     <!-- As linhas serão inseridas aqui -->
                 </tbody>
+                <?php
+                    if($resultado->num_rows > 0) {
+                        while($row = $resultado->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . $row['titulo'] . "</td>";
+                            echo "<td>" . $row['quantidade'] . "</td>";
+                            echo "<td>" . $row['autor'] . "</td>";
+                            echo "<td>" . $row['editora'] . "</td>";
+                            $data_formatada = date("d/m/Y", strtotime($row['data_pub']));
+                            echo "<td>" . $data_formatada . "</td>";
+                            echo "<td>" . $row['situacao'] . "</td>";
+                            if($row['observacao'] == "") {
+                                echo "<td>N/A</td>";
+                            }else{
+                                echo "<td>" . $row['observacao'] . "</td>";
+                            }
+                            echo "<td>
+                                    <button class='btn btn-sm btn-primary'>Editar</button>
+                                    <button class='btn btn-sm btn-danger'>Excluir</button>
+                                </td>";
+                            echo "</tr>";
+                        }
+                    }
+                ?>
+                </tbody>
             </table>
         </div>
+        
     </div>
 
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastroModal"
@@ -128,6 +161,23 @@
                                     </select>
                                 </div>  
                         </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                    <label for="situacao" class="form-label">Faixa Etária</label>
+                                    <select class="form-select" id="faixa" name="faixa" required>  
+                                        <option value="Adulto">Adulto</option>
+                                        <option value="Juvenil">Juvenil</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="situacao" class="form-label">Localização</label>
+                                    <select class="form-select" id="local" name="local" required>  
+                                        <option value="SAventura"> Setor Aventura</option>
+                                        <option value="SMangá">Setor Mangá</option>
+                                        <option value="SFantasisa"> Setor Fantasia</option>
+                                    </select>
+                                </div>  
+                        </div>
                         <div class="mb-3">
                             <label for="observacoes" class="form-label">Observações</label>
                             <textarea class="form-control" id="observacoes" rows="3" style="resize: none;" name="observacoes"></textarea>
@@ -147,6 +197,7 @@
             </div>
         </div>
     </div>
+    
 
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
