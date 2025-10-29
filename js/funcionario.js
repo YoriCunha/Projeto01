@@ -1,12 +1,12 @@
 const data = [
-    {  nome: "Harry Potter e a Pedra Filosofal", autor: "J. K. Rowling", genero: "Fantasia", faixa: "Juvenil" },
-    {  nome: "As Crônicas de Nárnia", autor: "C. S. Lewis", genero: "Aventura", faixa: "Juvenil" },
-    {  nome: "One Piece vol. 104", autor: "Eiichiro Oda", genero: "Mangá", faixa: "Juvenil" },
-    {  nome: "Harry Potter e a Ordem da Fênix", autor: "J. K. Rowling", genero: "Fantasia", faixa: "Juvenil" },
-    {  nome: "Bleach Remix vol. 12", autor: "Tite Kubo", genero: "Mangá", faixa: "Juvenil" },
-    {  nome: "Cartas de um Diabo a seu Aprendiz", autor: "C. S. Lewis", genero: "Fantasia", faixa: "Adulto" },
-    {  nome: "Bleach vol. 49", autor: "Tite Kubo", genero: "Mangá", faixa: "Adulto" },
-    {  nome:"Berserk vol. 1", autor: "Kentaro Miura", genero: "Mangá", faixa: "Adulto" }
+    { id: 1, imagem: "../img/livro1.png", titulo: "Harry Potter e a Pedra Filosofal", autor: "J. K. Rowling", genero: "Fantasia", faixa: "Juvenil" },
+    { id: 2, imagem: "../img/livro2.jpg", titulo: "As Crônicas de Nárnia", autor: "C. S. Lewis", genero: "Aventura", faixa: "Juvenil" },
+    { id: 3, imagem: "../img/livro3.png", tirulo: "One Piece vol. 104", autor: "Eiichiro Oda", genero: "Mangá", faixa: "Juvenil" },
+    { id: 4, imagem: "../img/livro4.jpg", titulo: "Harry Potter e a Ordem da Fênix", autor: "J. K. Rowling", genero: "Fantasia", faixa: "Juvenil" },
+    { id: 5, imagem: "../img/livro5.png", titulo: "Bleach Remix vol. 12", autor: "Tite Kubo", genero: "Mangá", faixa: "Juvenil" },
+    { id: 6, imagem: "../img/livro6.png", titulo: "Cartas de um Diabo a seu Aprendiz", autor: "C. S. Lewis", genero: "Fantasia", faixa: "Adulto" },
+    { id: 7, imagem: "../img/livro7.jpg", titulo: "Bleach vol. 49", autor: "Tite Kubo", genero: "Mangá", faixa: "Adulto" },
+    { id: 8, imagem: "../img/livro8.jpg", titulo: "Berserk vol. 1", autor: "Kentaro Miura", genero: "Mangá", faixa: "Adulto" }
 ];
 
 const cardContainer = document.getElementById("card-grid");
@@ -21,7 +21,7 @@ const displayData = (dataToDisplay) => {
         card.innerHTML = `
             <a href="view/livro.php?id=${e.id}" style="text-decoration: none; color: inherit;">
                 <img src="${e.imagem}" alt="Capa do Livro">
-                <p>${e.nome}</p>
+                <p>${e.titulo}</p>
                 <p>${e.autor}</p>
                 <p>${e.genero}</p>
             </a>

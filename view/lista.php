@@ -1,7 +1,7 @@
 <?php
 include("../backend/conexao.php");
 
-$puxa = "SELECT id_livro, titulo, quantidade, autor, editora, data_pub, situacao, observacao, genero, faixa, localizacao, sinopse FROM livros";
+$puxa = "SELECT id_livro, titulo, quantidade, autor, editora, data_pub, situacao, observacao, genero, faixa, localizacao, sinopse, imagem FROM livros";
 $resultado = mysqli_query($conexao, $puxa);
 
 ?>
@@ -57,6 +57,7 @@ $resultado = mysqli_query($conexao, $puxa);
             <table class="table text-center" id="tabelaLivros">
                 <thead>
                     <tr>
+                        <th>Imagem</th>
                         <th>Título</th>
                         <th>Quantidade</th>
                         <th>Autor</th>
@@ -74,6 +75,7 @@ $resultado = mysqli_query($conexao, $puxa);
                 if ($resultado->num_rows > 0) {
                     while ($row = $resultado->fetch_assoc()) {
                         echo "<tr>";
+                        echo "<td><img src='../img/" . $row['imagem'] . "' width='60' height='80' style='object-fit:cover;'></td>";
                         echo "<td>" . $row['titulo'] . "</td>";
                         echo "<td>" . $row['quantidade'] . "</td>";
                         echo "<td>" . $row['autor'] . "</td>";
@@ -87,8 +89,13 @@ $resultado = mysqli_query($conexao, $puxa);
                             echo "<td>" . $row['observacao'] . "</td>";
                         }
                         echo "<td>
-                                <button 
-                                    class='btn btn-sm btn-primary editarBtn' data-bs-toggle='modal' data-bs-target='#editarModal'>Editar</button>
+                                <button class='btn btn-sm btn-primary editarBtn' 
+                                        data-bs-toggle='modal' 
+                                        data-bs-target='#editarModal'
+                                        data-id='" . $row['id_livro'] . "'>
+                                Editar
+                                </button>
+                                <button class='btn btn-sm btn-danger excluirBtn'data-id='" . $row['id_livro'] . "'>Excluir</button>
                             </td>";
                     }
                 }
@@ -115,7 +122,7 @@ $resultado = mysqli_query($conexao, $puxa);
                 </div>
 
                 <div class="modal-body">
-                    <form id="formCadastro" action="../backend/acoes.php" method="POST">
+                    <form id="formCadastro" action="../backend/acoes.php" method="POST" enctype="multipart/form-data">
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="titulo" class="form-label">Título</label>
@@ -176,6 +183,7 @@ $resultado = mysqli_query($conexao, $puxa);
                                     <option value="SFantasisa"> Setor Fantasia</option>
                                 </select>
                             </div>
+
                         </div>
                         <div class="mb-3">
                             <label for="observacoes" class="form-label">Observações</label>
@@ -186,6 +194,9 @@ $resultado = mysqli_query($conexao, $puxa);
                             <label for="sinopse" class="form-label">Sinópse</label>
                             <textarea class="form-control" id="sinopse" rows="3" style="resize: none;"
                                 name="sinopse"></textarea>
+                        </div>
+                        <div class="md-3">
+                            <input type="file" name="imagem" class="form-control" accept="image/*" required>
                         </div>
                     </form>
                 </div>
@@ -211,9 +222,10 @@ $resultado = mysqli_query($conexao, $puxa);
                 </div>
 
                 <div class="modal-body">
-                    <form id="formEditar" action="" method="POST">
+                    <form id="formEditar" action="../backend/update.php" method="POST" enctype="multipart/form-data">
                         <div class="row mb-3">
                             <div class="col-md-6">
+                                <input type="hidden" id="idEdit" name="id">
                                 <label for="titulo" class="form-label">Título</label>
                                 <input type="text" class="form-control" id="tituloEdit" name="titulo" required>
                             </div>
@@ -284,6 +296,13 @@ $resultado = mysqli_query($conexao, $puxa);
                             <textarea class="form-control" id="sinopseEdit" rows="3" style="resize: none;"
                                 name="sinopse"></textarea>
                         </div>
+                        <div class="md-3">
+                            <input type="file" name="imagem" class="form-control mb-3" accept="image/*" required>
+                        </div>
+                        <div class="text-center mb-3">
+                            <img id="imagemPreview" src="" alt="Prévia da Capa"
+                                style="max-width: 150px; height: auto; border-radius: 8px; border: 1px solid #ccc;">
+                        </div>
                     </form>
                 </div>
 
@@ -298,6 +317,63 @@ $resultado = mysqli_query($conexao, $puxa);
 
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabela = document.getElementById('tabelaLivros'); // troque pelo id real da sua tabela
+            if (!tabela) return;
+
+            tabela.addEventListener('click', function (e) {
+                const btn = e.target.closest('.editarBtn');
+                if (!btn) return;
+
+                const tr = btn.closest('tr');
+                if (!tr) return;
+
+                const cells = tr.querySelectorAll('td');
+
+                // ID do livro (vem do botão data-id)
+                const idEdit = document.getElementById('idEdit');
+                if (idEdit) idEdit.value = btn.getAttribute('data-id');
+
+                // Agora preenche os campos do modal de acordo com a posição das colunas
+                // ⚠️ Ajuste os índices conforme a ordem real da sua tabela HTML
+                // Exemplo (ordem comum):
+                // 0=Imagem, 1=Título, 2=Quantidade, 3=Autor, 4=Editora, 5=Data, 6=Gênero, 7=Situação, 8=Faixa, 9=Localização, 10=Observações, 11=Sinópse
+                document.getElementById('tituloEdit').value = cells[1]?.innerText?.trim() || "";
+                document.getElementById('quantidadeEdit').value = cells[2]?.innerText?.trim() || "";
+                document.getElementById('autorEdit').value = cells[3]?.innerText?.trim() || "";
+                document.getElementById('editoraEdit').value = cells[4]?.innerText?.trim() || "";
+                document.getElementById('dataCadastroEdit').value = cells[5]?.innerText?.trim() || "";
+                document.getElementById('generoEdit').value = cells[6]?.innerText?.trim() || "";
+                document.getElementById('situacaoEdit').value = cells[7]?.innerText?.trim() || "";
+                document.getElementById('faixaEdit').value = cells[8]?.innerText?.trim() || "";
+                document.getElementById('localEdit').value = cells[9]?.innerText?.trim() || "";
+                document.getElementById('observacoesEdit').value = cells[10]?.innerText?.trim() || "";
+                document.getElementById('sinopseEdit').value = cells[11]?.innerText?.trim() || "";
+
+                // Se tiver imagem na linha, mostra a prévia no modal
+                const imgTag = tr.querySelector('img');
+                const preview = document.getElementById('imagemPreview');
+                if (preview) {
+                    preview.src = imgTag ? imgTag.src : "";
+                }
+
+                // Abre o modal manualmente (caso o botão não tenha data-bs-target)
+                const modal = new bootstrap.Modal(document.getElementById('editarModal'));
+                modal.show();
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.excluirBtn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const id = this.getAttribute('data-id');
+                    if (confirm("Tem certeza que deseja excluir este livro?")) {
+                        window.location.href = "../backend/delete.php?id=" + id;
+                    }
+                });
+            });
+        });
+    </script>   
 </body>
 
 </html>
