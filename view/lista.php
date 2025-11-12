@@ -57,7 +57,6 @@ $resultado = mysqli_query($conexao, $puxa);
             <table class="table text-center" id="tabelaLivros">
                 <thead>
                     <tr>
-                        <th>Imagem</th>
                         <th>Título</th>
                         <th>Quantidade</th>
                         <th>Autor</th>
@@ -75,7 +74,6 @@ $resultado = mysqli_query($conexao, $puxa);
                 if ($resultado->num_rows > 0) {
                     while ($row = $resultado->fetch_assoc()) {
                         echo "<tr>";
-                        echo "<td><img src='../img/" . $row['imagem'] . "' width='60' height='80' style='object-fit:cover;'></td>";
                         echo "<td>" . $row['titulo'] . "</td>";
                         echo "<td>" . $row['quantidade'] . "</td>";
                         echo "<td>" . $row['autor'] . "</td>";

@@ -12,7 +12,7 @@ require 'backend/conexao.php';
     <script src="https://kit.fontawesome.com/3ab4c965c5.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="img/book.png">
-
+    
     <title>Book Finder</title>
 </head>
 
@@ -31,39 +31,7 @@ require 'backend/conexao.php';
         </div>
     </nav>
 
-    <!-- Botão de filtro -->
-    <button id="btnFiltrar">
-        <i class="fa fa-arrow-right"></i>
-    </button>
-
-    <!-- Sidebar de filtros -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h3>Filtros</h3>
-            <button id="btnFechar"><i class="fa fa-close"></i></button>
-        </div>
-        <div class="sidebar-body">
-            <div class="filtro-grupo">
-                <p>Gênero</p>
-                <label><input type="checkbox" id="filtroAventura"> Aventura</label>
-                <label><input type="checkbox" id="filtroManga"> Mangá</label>
-                <label><input type="checkbox" id="filtroFantasia"> Fantasia</label>
-            </div>
-            <div class="filtro-grupo">
-                <p>Autor</p>
-                <label><input type="checkbox" id="filtroCSLewis"> C. S. Lewis</label>
-                <label><input type="checkbox" id="filtroJKRowling"> J. K. Rowling</label>
-                <label><input type="checkbox" id="filtroTiteKubo"> Tite Kubo</label>
-                <label><input type="checkbox" id="filtroEiichiroOda"> Eiichiro Oda</label>
-            </div>
-            <div class="filtro-grupo">
-                <p>Faixa Etária</p>
-                <label><input type="checkbox" id="filtroJuvenil"> Juvenil</label>
-                <label><input type="checkbox" id="filtroAdulto"> Adulto</label>
-            </div>
-        </div>
-    </div>
-
+    
     <!-- Dashboard -->
     <main class="container-dashboard">
         <div class="search-box">
