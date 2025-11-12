@@ -32,7 +32,7 @@ window.addEventListener("DOMContentLoaded", () => {
             card.innerHTML = `
                 <a href="view/livro.php?id=${e.id}" style="text-decoration: none; color: inherit;">
                     <img src="${e.imagem}" alt="Capa do Livro">
-                    <p>${e.nome}</p>
+                    <p>${e.titulo}</p>
                     <p>${e.autor}</p>
                     <p>${e.genero}</p>
                 </a>

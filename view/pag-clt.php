@@ -30,12 +30,10 @@
         </div>
     </nav>
 
-    <!-- Botão de filtro -->
+    <!-- 
     <button id="btnFiltrar">
         <i class="fa fa-arrow-right"></i>
     </button>
-
-    <!-- Sidebar de filtros -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h3>Filtros</h3>
@@ -61,7 +59,7 @@
                 <label><input type="checkbox" id="filtroAdulto"> Adulto</label>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Dashboard -->
     <main class="container-dashboard">
