@@ -46,23 +46,11 @@ window.addEventListener("DOMContentLoaded", () => {
         searchInput.addEventListener("input", (e) => {
             const search = e.target.value.toLowerCase();
             const filtered = data.filter(i =>
-                i.nome.toLowerCase().includes(search) ||
+                i.titulo.toLowerCase().includes(search) ||
                 i.autor.toLowerCase().includes(search) ||
                 i.genero.toLowerCase().includes(search)
             );
             displayData(filtered);
-        });
-    }
-
-    // Sidebar (opcional)
-    const btnFiltrar = document.getElementById("btnFiltrar");
-    const sidebar = document.getElementById("sidebar");
-    const btnFechar = document.getElementById("btnFechar");
-
-    if (btnFiltrar && sidebar && btnFechar) {
-        btnFiltrar.addEventListener("click", () => {
-            sidebar.classList.add("ativo");
-            btnFiltrar.style.display = "none";
         });
     }
 
