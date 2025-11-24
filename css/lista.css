@@ -16,12 +16,16 @@ body {
     gap: 10px;
 }
 .navbar {
-    font-family: 'Alice', serif;
-    padding: 1.15rem 1.5rem;
+    padding:0.5rem 1.5rem;
+    box-shadow: 0 5px 4px rgba(0,0,0,.25);
+    background-color: #fff;
 }
 
 .navbar-title {
+    font-family: 'Alice', serif;
     font-size: 2rem;
+    text-decoration: none;
+    color: black;
 }
 
 .botao {

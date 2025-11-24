@@ -21,7 +21,7 @@
             <a class="navbar-brand navbar-title mx-auto position-relative" href="pag-clt.php">Book Finder</a>
 
             <div class="botao position-absolute" style="right: 0;">
-                <a href="../view/lista.php" class="nav-link p-0 text-center">Cadastro</a>
+                <a href="../view/lista.php" class="nav-link p-0 text-center">Emprestimos e Devoluções</a>
             </div>
 
             <div class="position-absolute" style="right: 0;">

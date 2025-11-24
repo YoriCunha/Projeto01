@@ -1,3 +1,4 @@
+
 window.addEventListener("DOMContentLoaded", () => {
     let data = [];
     const cardContainer = document.getElementById("card-grid");
@@ -53,7 +54,44 @@ window.addEventListener("DOMContentLoaded", () => {
             displayData(filtered);
         });
     }
+    function filtrarLivros() {
+    let textoBusca = searchInput.value.toLowerCase();
 
+    // valores dos filtros
+    let aventura = document.getElementById("filtroAventura").checked;
+    let manga = document.getElementById("filtroManga").checked;
+    let fantasia = document.getElementById("filtroFantasia").checked;
+
+    let juvenil = document.getElementById("filtroJuvenil").checked;
+    let adulto = document.getElementById("filtroAdulto").checked;
+
+    return data.filter(livro => {
+        // ----------- BUSCA -----------
+        if (!livro.titulo.toLowerCase().includes(textoBusca) &&
+            !livro.autor.toLowerCase().includes(textoBusca)) {
+            return false;
+        }
+
+        // ----------- FILTRO DE GÊNERO -----------
+        let generoOK =
+            (!aventura && !manga && !fantasia) || // nenhum filtro → tudo ok
+            (aventura && livro.genero === "Aventura") ||
+            (manga && livro.genero === "Mangá") ||
+            (fantasia && livro.genero === "Fantasia");
+
+        if (!generoOK) return false;
+
+        // ----------- FILTRO DE FAIXA ETÁRIA -----------
+        let faixaOk =
+            (!juvenil && !adulto) ||
+            (juvenil && livro.faixa === "Juvenil") ||
+            (adulto && livro.faixa === "Adulto");
+
+        if (!faixaOk) return false;
+
+        return true;
+    });
+}
     // Carrega os livros
     fetchData();
 });

@@ -21,18 +21,26 @@ $resultado = mysqli_query($conexao, $puxa);
 </head>
 
 <body>
-    <nav class="navbar navbar-expand border-bottom"
-        style="padding: 0.5rem 1rem; background-color: #fff; box-shadow: 0 5px 4px rgba(0,0,0,.25);">
-        <div class="w-100 d-flex align-items-center justify-content-center position-relative">
+<nav class="navbar navbar-expand border-bottom">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a class="navbar-brand navbar-title" href="pag-clt.php">Book Finder</a>
 
-            <a class="navbar-brand navbar-title mx-auto" href="pag-clt.php">Book Finder</a>
-
-            <div class="botao position-absolute" style="right: 0; width: 13rem;">
-                <a href="../view/emprestimo.php" class="nav-link p-0 text-center">Emprestimo/Devoluções</a>
-            </div>
-
-            <div class="position-absolute" style="right: 0;">
-                <a href="../view/login.html" class="nav-link p-0">
+            <div class="d-flex gap-3 align-items-center">
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                        aria-expanded="false" style="border: none;">
+                        Menu
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="lista.php">Cadastro</a></li>
+                        <li><a class="dropdown-item" href="">Emprestimos e Devoluções</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item text-danger" href="#">Sair</a></li>
+                    </ul>
+                </div>
+                <a href="../view/login.php" class="nav-link p-0">
                     <i class="fa fa-user-circle" style="font-size: 2rem; color: #333;"></i>
                 </a>
             </div>
