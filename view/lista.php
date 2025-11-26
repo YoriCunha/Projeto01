@@ -21,7 +21,7 @@ $resultado = mysqli_query($conexao, $puxa);
 </head>
 
 <body>
-<nav class="navbar navbar-expand border-bottom">
+    <nav class="navbar navbar-expand border-bottom">
         <div class="container-fluid d-flex justify-content-between align-items-center">
             <a class="navbar-brand navbar-title" href="pag-clt.php">Book Finder</a>
 
@@ -32,12 +32,12 @@ $resultado = mysqli_query($conexao, $puxa);
                         Menu
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="lista.php">Cadastro</a></li>
-                        <li><a class="dropdown-item" href="">Emprestimos e Devoluções</a></li>
+                        <li><a class="dropdown-item" href="#">Clientes</a></li>
+                        <li><a class="dropdown-item" href="emprestimo.php">Emprestimos e Devoluções</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item text-danger" href="#">Sair</a></li>
+                        <li><a class="dropdown-item text-danger" href="index.php">Sair</a></li> 
                     </ul>
                 </div>
                 <a href="../view/login.php" class="nav-link p-0">
@@ -98,7 +98,7 @@ $resultado = mysqli_query($conexao, $puxa);
                                 <button class='btn btn-sm btn-primary editarBtn' 
                                         data-bs-toggle='modal' 
                                         data-bs-target='#editarModal'
-                                        data-id='" . $row['id_livro'] . "'>
+                                        data-id='" . $row['id_livro'] . "' id='123'>
                                 Editar
                                 </button>
                                 <button class='btn btn-sm btn-danger excluirBtn'data-id='" . $row['id_livro'] . "'>Excluir</button>
@@ -231,13 +231,13 @@ $resultado = mysqli_query($conexao, $puxa);
                     <form id="formEditar" action="../backend/update.php" method="POST" enctype="multipart/form-data">
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <input type="hidden" id="idEdit" name="id">
+                                <input type="hidden" id="idEdit" name="id_livro">
                                 <label for="titulo" class="form-label">Título</label>
                                 <input type="text" class="form-control" id="tituloEdit" name="titulo" required>
                             </div>
                             <div class="col-md-3">
                                 <label for="quantidade" class="form-label">Quantidade</label>
-                                <input type="number" class="form-control" id="quantidadeEdit" name="qtd" required
+                                <input type="number" class="form-control" id="quantidadeEdit" name="quantidade" required
                                     min="1">
                             </div>
                             <div class="col-md-3">
@@ -303,11 +303,7 @@ $resultado = mysqli_query($conexao, $puxa);
                                 name="sinopse"></textarea>
                         </div>
                         <div class="md-3">
-                            <input type="file" name="imagem" class="form-control mb-3" accept="image/*" required>
-                        </div>
-                        <div class="text-center mb-3">
-                            <img id="imagemPreview" src="" alt="Prévia da Capa"
-                                style="max-width: 150px; height: auto; border-radius: 8px; border: 1px solid #ccc;">
+                            <input type="file" name="imagem" class="form-control mb-3" accept="image/*">
                         </div>
                     </form>
                 </div>
@@ -328,45 +324,39 @@ $resultado = mysqli_query($conexao, $puxa);
             const tabela = document.getElementById('tabelaLivros'); // troque pelo id real da sua tabela
             if (!tabela) return;
 
-            tabela.addEventListener('click', function (e) {
-                const btn = e.target.closest('.editarBtn');
+            document.addEventListener("click", function (e) {
+                const btn = e.target.closest(".editarBtn");
                 if (!btn) return;
 
-                const tr = btn.closest('tr');
-                if (!tr) return;
+                const id = btn.getAttribute("data-id");
 
-                const cells = tr.querySelectorAll('td');
+                // Preenche o ID no formulário
+                document.getElementById("idEdit").value = id;
 
-                // ID do livro (vem do botão data-id)
-                const idEdit = document.getElementById('idEdit');
-                if (idEdit) idEdit.value = btn.getAttribute('data-id');
+                // Agora buscamos os dados no banco
+                fetch("../backend/listaLivros.php?id=" + id)
+                    .then(r => r.json())
+                    .then(dados => {
 
-                // Agora preenche os campos do modal de acordo com a posição das colunas
-                // ⚠️ Ajuste os índices conforme a ordem real da sua tabela HTML
-                // Exemplo (ordem comum):
-                // 0=Imagem, 1=Título, 2=Quantidade, 3=Autor, 4=Editora, 5=Data, 6=Gênero, 7=Situação, 8=Faixa, 9=Localização, 10=Observações, 11=Sinópse
-                document.getElementById('tituloEdit').value = cells[1]?.innerText?.trim() || "";
-                document.getElementById('quantidadeEdit').value = cells[2]?.innerText?.trim() || "";
-                document.getElementById('autorEdit').value = cells[3]?.innerText?.trim() || "";
-                document.getElementById('editoraEdit').value = cells[4]?.innerText?.trim() || "";
-                document.getElementById('dataCadastroEdit').value = cells[5]?.innerText?.trim() || "";
-                document.getElementById('generoEdit').value = cells[6]?.innerText?.trim() || "";
-                document.getElementById('situacaoEdit').value = cells[7]?.innerText?.trim() || "";
-                document.getElementById('faixaEdit').value = cells[8]?.innerText?.trim() || "";
-                document.getElementById('localEdit').value = cells[9]?.innerText?.trim() || "";
-                document.getElementById('observacoesEdit').value = cells[10]?.innerText?.trim() || "";
-                document.getElementById('sinopseEdit').value = cells[11]?.innerText?.trim() || "";
+                        document.getElementById("tituloEdit").value = dados.titulo;
+                        document.getElementById("quantidadeEdit").value = dados.quantidade;
+                        document.getElementById("autorEdit").value = dados.autor;
+                        document.getElementById("editoraEdit").value = dados.editora;
+                        document.getElementById("dataCadastroEdit").value = dados.data_pub;
 
-                // Se tiver imagem na linha, mostra a prévia no modal
-                const imgTag = tr.querySelector('img');
-                const preview = document.getElementById('imagemPreview');
-                if (preview) {
-                    preview.src = imgTag ? imgTag.src : "";
-                }
+                        document.getElementById("generoEdit").value = dados.genero;
+                        document.getElementById("situacaoEdit").value = dados.situacao;
+                        document.getElementById("faixaEdit").value = dados.faixa;
+                        document.getElementById("localEdit").value = dados.localizacao;
 
-                // Abre o modal manualmente (caso o botão não tenha data-bs-target)
-                const modal = new bootstrap.Modal(document.getElementById('editarModal'));
-                modal.show();
+                        document.getElementById("observacoesEdit").value = dados.observacao;
+                        document.getElementById("sinopseEdit").value = dados.sinopse;
+
+                        // abre modal
+                        const modal = new bootstrap.Modal(document.getElementById("editarModal"));
+                        modal.show();
+                    })
+                    .catch(err => console.log("ERRO:", err));
             });
         });
         document.addEventListener('DOMContentLoaded', function () {
@@ -379,7 +369,7 @@ $resultado = mysqli_query($conexao, $puxa);
                 });
             });
         });
-    </script>   
+    </script>
 </body>
 
 </html>

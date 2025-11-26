@@ -35,7 +35,7 @@
                         <li><a class="dropdown-item text-danger" href="#">Sair</a></li>
                     </ul>
                 </div>
-                <a href="../view/login.php" class="nav-link p-0">
+                <a href="#" class="nav-link p-0">
                     <i class="fa fa-user-circle" style="font-size: 2rem; color: #333;"></i>
                 </a>
             </div>
