@@ -10,7 +10,7 @@ if (!isset($_GET['id'])) {
 $id = intval($_GET['id']);
 
 $sql = "SELECT id_livro, titulo, quantidade, autor, editora, data_pub, 
-        situacao, observacao, faixa, localizacao, sinopse, genero,
+        situacao, observacao, faixa, localizacao, sinopse, genero
         FROM livros 
         WHERE id_livro = $id";
 
@@ -24,3 +24,4 @@ if ($result && $result->num_rows > 0) {
 
 $conexao->close();
 ?>
+

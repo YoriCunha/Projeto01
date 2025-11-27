@@ -31,7 +31,7 @@ window.addEventListener("DOMContentLoaded", () => {
             const card = document.createElement("div");
             card.classList.add("sellcard");
             card.innerHTML = `
-                <a href="view/livro.php?id=${e.id}" style="text-decoration: none; color: inherit;">
+                <a href="livro.php?id=${e.id}" style="text-decoration: none; color: inherit;">
                     <img src="${e.imagem}" alt="Capa do Livro">
                     <p>${e.titulo}</p>
                     <p>${e.autor}</p>

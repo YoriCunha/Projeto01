@@ -25,7 +25,7 @@
                         Menu
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#">Clientes</a></li>
+                        <li><a class="dropdown-item" href="clientes.php">Clientes</a></li>
                         <li><a class="dropdown-item" href="lista.php">Cadasto</a></li>
                         <li>
                             <hr class="dropdown-divider">

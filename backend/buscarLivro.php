@@ -30,3 +30,4 @@ echo json_encode([
     "data_pub" => $dados['data_pub'] // importante para preencher o <input type="date">
 ]);
 ?>
+

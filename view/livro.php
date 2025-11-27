@@ -49,27 +49,28 @@
         </div>
     </div>
    
-
     <script>
-        // Pega o ID da URL
-        const params = new URLSearchParams(window.location.search);
-        const id = params.get("id");
+    // Pega o ID da URL
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
 
-        // Busca o JSON com os livros
-        fetch("../json/livros.json")
+    // Busca o livro no banco
+        fetch("../backend/buscaUmLivro.php?id=" + id)
             .then(res => res.json())
-            .then(livros => {
-                if (livros[id]) {
-                    document.getElementById("livro-titulo").innerText = livros[id].titulo;
-                    document.getElementById("livro-autor").innerText = livros[id].autor;
-                    document.getElementById("livro-sinopse").innerText = livros[id].sinopse;
-                    document.getElementById("livro-localizacao").innerText = livros[id].localizacao;
-                    document.getElementById("livro-imagem").src = livros[id].imagem;
-                } else {
+            .then(livro => {
+
+                if (!livro || livro.erro) {
                     document.getElementById("livro-titulo").innerText = "Livro não encontrado";
+                    return;
                 }
+
+                document.getElementById("livro-titulo").innerText = livro.titulo;
+                document.getElementById("livro-autor").innerText = livro.autor;
+                document.getElementById("livro-sinopse").innerText = livro.sinopse;
+                document.getElementById("livro-localizacao").innerText = livro.localizacao;
+                document.getElementById("livro-imagem").src = livro.imagem;
             })
-            .catch(err => console.error("Erro ao carregar JSON:", err));
+            .catch(err => console.error("Erro ao buscar livro:", err));
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

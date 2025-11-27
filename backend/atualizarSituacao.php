@@ -24,3 +24,5 @@ if ($sql->execute()) {
         "error" => "Erro ao atualizar: " . $conexao->error
     ]);
 }
+?>
+

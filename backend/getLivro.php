@@ -16,3 +16,4 @@ if ($result && $result->num_rows > 0) {
 echo json_encode($livros, JSON_UNESCAPED_UNICODE);
 $conexao->close();
 ?>
+
