@@ -65,6 +65,7 @@ $resultado = mysqli_query($conexao, $puxa);
             <table class="table text-center" id="tabelaLivros">
                 <thead>
                     <tr>
+                        <th>Código</th>
                         <th>Título</th>
                         <th>Quantidade</th>
                         <th>Autor</th>
@@ -82,6 +83,7 @@ $resultado = mysqli_query($conexao, $puxa);
                 if ($resultado->num_rows > 0) {
                     while ($row = $resultado->fetch_assoc()) {
                         echo "<tr>";
+                        echo "<td>" . $row['id_livro'] . "</td>";
                         echo "<td>" . $row['titulo'] . "</td>";
                         echo "<td>" . $row['quantidade'] . "</td>";
                         echo "<td>" . $row['autor'] . "</td>";
@@ -160,7 +162,7 @@ $resultado = mysqli_query($conexao, $puxa);
                                 <label for="situacao" class="form-label">Gênero</label>
                                 <select class="form-select" id="genero" name="genero" required>
                                     <option value="Aventura">Aventura</option>
-                                    <option value="Mangá">Mangá</option>
+                                    <option value="Mangá">Shonen</option>
                                     <option value="Fantasisa">Fantasia</option>
                                 </select>
                             </div>
@@ -369,6 +371,7 @@ $resultado = mysqli_query($conexao, $puxa);
                 });
             });
         });
+        
     </script>
 </body>
 

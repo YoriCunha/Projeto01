@@ -48,7 +48,8 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="codigo" class="form-label">Código</label>
-                    <input type="text" class="form-control" id="codigo" required style="width: 100%;">
+                    <input type="number" class="form-control" id="codigo" required style="width: 100%;"
+                        placeholder="Informe o código">
                 </div>
             </div>
             <div class="row mb-3">
@@ -72,6 +73,7 @@
                 <div class="col-md-6">
                     <label for="situacao" class="form-label">Situação</label>
                     <select class="form-select" id="situacao" required>
+                        <option value="Disponivel">Disponível</option>
                         <option value="Emprestado">Emprestado</option>
                         <option value="Devolvido">Devolvido</option>
                     </select>
@@ -104,8 +106,70 @@
             </footer>
         </form>
     </div>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById("codigo").addEventListener("blur", buscarLivro);
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        function buscarLivro() {
+            const id = document.getElementById("codigo").value.trim();
+            if (!id) return;
+
+            fetch("backend/buscarLivro.php?id=" + id)
+                .then(response => response.json())
+                .then(dados => {
+                    if (dados.error) {
+                        alert("Livro não encontrado!");
+                        // Limpar campos caso não encontre
+                        document.getElementById("titulo").value = "";
+                        document.getElementById("autor").value = "";
+                        document.getElementById("editora").value = "";
+                        document.getElementById("situacao").value = "Devolvido";
+                        return;
+                    }
+
+                    // Preenche os campos com os dados do banco
+                    document.getElementById("titulo").value = dados.titulo;
+                    document.getElementById("autor").value = dados.autor;
+                    document.getElementById("editora").value = dados.editora;
+
+                    // Se o banco tiver data em formato YYYY-MM-DD, podemos preencher direto
+
+                    // Exemplo: alterar algum valor automaticamente
+
+                })
+                .catch(err => console.error("Erro ao buscar livro:", err));
+        }
+        document.getElementById("formCadastro").addEventListener("submit", function (e) {
+            e.preventDefault(); // impede recarregar a página
+
+            const dados = {
+                id: document.getElementById("codigo").value.trim(),
+                situacao: document.getElementById("situacao").value
+            };
+
+            if (!dados.id) {
+                alert("Informe o código do livro antes de atualizar a situação.");
+                return;
+            }
+
+            fetch("backend/atualizarSituacao.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(dados)
+            })
+                .then(res => res.json())
+                .then(resposta => {
+                    if (resposta.success) {
+                        alert("Situação do livro atualizada com sucesso!");
+                    } else {
+                        alert("Erro ao atualizar: " + resposta.error);
+                    }
+                })
+                .catch(err => console.error(err));
+        });
+    </script>
+</body>
 
 </html>
