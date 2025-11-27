@@ -48,21 +48,21 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="codigo" class="form-label">Código</label>
-                    <input type="number" class="form-control" id="codigo" required style="width: 100%;"
+                    <input type="number" class="form-control" id="codigo" name="id" required style="width: 100%;"
                         placeholder="Informe o código">
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col">
                     <label for="titulo" class="form-label">Título</label>
-                    <input type="text" class="form-control" id="titulo" required style="width: 100%;">
+                    <input type="text" class="form-control" id="titulo" style="width: 100%;">
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="autor" class="form-label">Autor</label>
-                    <input type="text" class="form-control" id="autor" required>
+                    <input type="text" class="form-control" id="autor">
                 </div>
                 <div class="col-md-6">
                     <label for="editora" class="form-label">Editora</label>
@@ -108,18 +108,20 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        
         document.getElementById("codigo").addEventListener("blur", buscarLivro);
-
+        
         function buscarLivro() {
             const id = document.getElementById("codigo").value.trim();
             if (!id) return;
 
-            fetch("backend/buscarLivro.php?id=" + id)
+            fetch("../backend/buscarLivro.php?id=" + id)
                 .then(response => response.json())
                 .then(dados => {
+                   
                     if (dados.error) {
                         alert("Livro não encontrado!");
-                        // Limpar campos caso não encontre
+                        
                         document.getElementById("titulo").value = "";
                         document.getElementById("autor").value = "";
                         document.getElementById("editora").value = "";
@@ -127,14 +129,11 @@
                         return;
                     }
 
-                    // Preenche os campos com os dados do banco
+           
                     document.getElementById("titulo").value = dados.titulo;
                     document.getElementById("autor").value = dados.autor;
                     document.getElementById("editora").value = dados.editora;
 
-                    // Se o banco tiver data em formato YYYY-MM-DD, podemos preencher direto
-
-                    // Exemplo: alterar algum valor automaticamente
 
                 })
                 .catch(err => console.error("Erro ao buscar livro:", err));
@@ -152,7 +151,7 @@
                 return;
             }
 
-            fetch("backend/atualizarSituacao.php", {
+            fetch("../backend/atualizarSituacao.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

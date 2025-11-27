@@ -1,23 +1,26 @@
 <?php
-include "conexao.php";
+header("Content-Type: application/json");
+require 'conexao.php';
 
-// Recebe JSON do fetch
-$dados = json_decode(file_get_contents("php://input"), true);
+// Lê os dados JSON enviados pelo fetch()
+$input = json_decode(file_get_contents("php://input"), true);
 
-if (!$dados || !isset($dados['id']) || !isset($dados['situacao'])) {
-    echo json_encode(["success" => false, "error" => "Dados inválidos"]);
+$id = $input['id'] ?? null;
+$situacao = $input['situacao'] ?? null;
+
+if (!$id || !$situacao) {
+    echo json_encode(["success" => false, "error" => "Dados incompletos"]);
     exit;
 }
 
-$id = intval($dados['id']);
-$situacao = mysqli_real_escape_string($conexao, $dados['situacao']);
+$sql = $conexao->prepare("UPDATE livros SET situacao = ? WHERE id_livro = ?");
+$sql->bind_param("si", $situacao, $id);
 
-// Atualiza apenas a situação
-$sql = "UPDATE livros SET situacao = '$situacao' WHERE id_livro = $id";
-
-if (mysqli_query($conexao, $sql)) {
+if ($sql->execute()) {
     echo json_encode(["success" => true]);
 } else {
-    echo json_encode(["success" => false, "error" => mysqli_error($conexao)]);
+    echo json_encode([
+        "success" => false,
+        "error" => "Erro ao atualizar: " . $conexao->error
+    ]);
 }
-?>

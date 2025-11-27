@@ -37,7 +37,7 @@ $resultado = mysqli_query($conexao, $puxa);
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item text-danger" href="index.php">Sair</a></li> 
+                        <li><a class="dropdown-item text-danger" href="../index.php">Sair</a></li> 
                     </ul>
                 </div>
                 <a href="../view/login.php" class="nav-link p-0">
@@ -48,7 +48,7 @@ $resultado = mysqli_query($conexao, $puxa);
     </nav>
 
     <div class="box" style="display: flex; gap: 1rem; margin: 2rem;">
-        <!-- SIDEBAR DE FILTROS -->
+        
         <div class="box-content"
             style="width: 15rem; background: transparent; border: 1px solid #ccc; border-radius: 8px; padding: 2rem;">
             <div class="sidebar-header">
@@ -77,7 +77,7 @@ $resultado = mysqli_query($conexao, $puxa);
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- As linhas serão inseridas aqui -->
+                  
                 </tbody>
                 <?php
                 if ($resultado->num_rows > 0) {
@@ -339,7 +339,7 @@ $resultado = mysqli_query($conexao, $puxa);
                 fetch("../backend/listaLivros.php?id=" + id)
                     .then(r => r.json())
                     .then(dados => {
-
+                        
                         document.getElementById("tituloEdit").value = dados.titulo;
                         document.getElementById("quantidadeEdit").value = dados.quantidade;
                         document.getElementById("autorEdit").value = dados.autor;

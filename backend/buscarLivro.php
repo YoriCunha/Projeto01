@@ -1,4 +1,5 @@
 <?php
+header("Content-Type: application/json");
 include "conexao.php";
 
 if (!isset($_GET['id'])) {
@@ -8,21 +9,24 @@ if (!isset($_GET['id'])) {
 
 $id = intval($_GET['id']);
 
-// Busca os dados do livro
-$sql = mysqli_query($conexao, "SELECT * FROM livros WHERE id_livro = $id");
+$sql = $conexao->prepare("SELECT titulo, autor, editora, situacao, data_pub FROM livros WHERE id_livro = ?");
+$sql->bind_param("i", $id);
+$sql->execute();
+$result = $sql->get_result();
 
-if (mysqli_num_rows($sql) == 0) {
+if ($result->num_rows === 0) {
     echo json_encode(["error" => "Livro não encontrado"]);
     exit;
 }
 
-$dados = mysqli_fetch_assoc($sql);
+$dados = $result->fetch_assoc();
 
-// Retorna JSON com os campos do formulário
+// Retorna todos os dados necessários ao formulário
 echo json_encode([
     "titulo" => $dados['titulo'],
     "autor" => $dados['autor'],
     "editora" => $dados['editora'],
-    "situacao" => $dados['situacao']
+    "situacao" => $dados['situacao'],
+    "data_pub" => $dados['data_pub'] // importante para preencher o <input type="date">
 ]);
 ?>
