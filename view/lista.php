@@ -32,7 +32,7 @@ $resultado = mysqli_query($conexao, $puxa);
                         Menu
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#">Clientes</a></li>
+                        <li><a class="dropdown-item" href="clientes.php">Clientes</a></li>
                         <li><a class="dropdown-item" href="emprestimo.php">Emprestimos e Devoluções</a></li>
                         <li>
                             <hr class="dropdown-divider">
@@ -63,6 +63,8 @@ $resultado = mysqli_query($conexao, $puxa);
         <div class="table-responsive w-100"
             style="border: 1px solid #ccc; border-radius: 1rem; margin-left: 5rem; margin-right: 5rem;">
             <table class="table text-center" id="tabelaLivros">
+            <caption class="text-center" style="caption-side: top; font-size: 2rem; padding: 1rem;">Livros
+            </caption>
                 <thead>
                     <tr>
                         <th>Código</th>
@@ -108,7 +110,6 @@ $resultado = mysqli_query($conexao, $puxa);
                     }
                 }
                 ?>
-                </tbody>
             </table>
         </div>
 
@@ -130,7 +131,7 @@ $resultado = mysqli_query($conexao, $puxa);
                 </div>
 
                 <div class="modal-body">
-                    <form id="formCadastro" action="../backend/acoes.php" method="POST" enctype="multipart/form-data">
+                    <form id="formCadastro" action="../backend/salvarLivro.php" method="POST" enctype="multipart/form-data">
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="titulo" class="form-label">Título</label>

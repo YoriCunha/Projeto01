@@ -20,7 +20,7 @@
 
             <!-- título central -->
             <a class="navbar-brand navbar-title mx-auto" href="../index.html">Book Finder</a>
-            
+
             <!-- ícone de usuário -->
             <div class="position-absolute" style="right: 0;">
                 <a href="../view/login.html" class="nav-link p-0">
@@ -48,29 +48,36 @@
             <p style="margin-top: 1.5rem;"><strong>Localização:</strong> <span id="livro-localizacao"></span></p>
         </div>
     </div>
-   
+
     <script>
-    // Pega o ID da URL
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
+        document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get("id");
 
-    // Busca o livro no banco
-        fetch("../backend/buscaUmLivro.php?id=" + id)
-            .then(res => res.json())
-            .then(livro => {
+            if (!id) {
+                console.error("ID do livro não definido na URL");
+                document.getElementById("livro-titulo").innerText = "ID do livro não definido!";
+                return;
+            }
 
-                if (!livro || livro.erro) {
-                    document.getElementById("livro-titulo").innerText = "Livro não encontrado";
-                    return;
-                }
+            fetch("../backend/buscaUmLivro.php?id=" + id)
+                .then(res => res.json())
+                .then(livro => {
+                    console.log("Livro recebido:", livro);
 
-                document.getElementById("livro-titulo").innerText = livro.titulo;
-                document.getElementById("livro-autor").innerText = livro.autor;
-                document.getElementById("livro-sinopse").innerText = livro.sinopse;
-                document.getElementById("livro-localizacao").innerText = livro.localizacao;
-                document.getElementById("livro-imagem").src = livro.imagem;
-            })
-            .catch(err => console.error("Erro ao buscar livro:", err));
+                    if (!livro || livro.erro) {
+                        document.getElementById("livro-titulo").innerText = "Livro não encontrado";
+                        return;
+                    }
+
+                    document.getElementById("livro-titulo").innerText = livro.titulo;
+                    document.getElementById("livro-autor").innerText = livro.autor;
+                    document.getElementById("livro-sinopse").innerText = livro.sinopse;
+                    document.getElementById("livro-localizacao").innerText = livro.localizacao;
+                    document.getElementById("livro-imagem").src = livro.imagem;
+                })
+                .catch(err => console.error("Erro ao buscar livro:", err));
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

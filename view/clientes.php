@@ -40,9 +40,75 @@
             </div>
         </div>
     </nav>
-    <main>
-    
-    </main>
+    <div class="box" style="align-items: center; display: flex; gap: rem; margin: 2rem;">
+        <div class="box-content" style="width: 15rem; background: transparent; padding: 1rem;">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#novoClienteModal">
+                Novo Cliente
+            </button>
+        </div>
+        <div class="table-responsive w-100"
+            style="border: 1px solid #ccc; border-radius: 1rem; margin-left: 5rem; margin-right: 5rem;">
+            <table class="table text-center">
+                <caption class="text-center" style="caption-side: top; font-size: 2rem; padding: 1rem;">Clientes
+                </caption>
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Telefone</th>
+                        <th scope="col">Endereço</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php include '../backend/listarCliente.php'; ?>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="novoClienteModal" tabindex="-1" aria-labelledby="cadastroModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="clienteModalLabel">Cadastro de Clientes</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="formCliente" action="../backend/salvarCliente.php" method="POST" enctype="multipart/form-data">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="nome" class="form-label">Nome:</label>
+                                <input type="text" class="form-control" id="nome" name="nome" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email:</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="telefone" class="form-label">Telefone:</label>
+                                <input type="text" class="form-control" id="telefone" name="telefone" required>
+                            </div>
+                            <div class="col-md-9">
+                                <label for="endereco" class="form-label">Endereço:</label>
+                                <input type="text" class="form-control" id="endereco" name="endereco" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary" name="saveclient">Salvar Cliente</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer>
         &copy; 2025 Book Finder. Todos os direitos reservados.
     </footer>
