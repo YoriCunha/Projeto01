@@ -13,11 +13,17 @@ if ($result && mysqli_num_rows($result) > 0) {
         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
         echo "<td>" . htmlspecialchars($row['telefone']) . "</td>";
         echo "<td>" . htmlspecialchars($row['endereco']) . "</td>";
-        echo "<td>
-                <a href='" . $row['id_clientes'] . "' class='btn btn-sm btn-primary'>Editar</a>
-                <a href='" . $row['id_clientes'] . "' class='btn btn-sm btn-danger'>Excluir</a>
-              </td>";
+        echo "<td> 
+                <button class='btn btn-sm btn-primary editarBtn' 
+                    data-bs-toggle='modal' 
+                    data-bs-target='#editarModal'
+                    data-id='" . $row['id_clientes'] . "' id='123'>
+                        Editar
+                        </button>
+                        <button class='btn btn-sm btn-danger excluirBtn'data-id='" . $row['id_clientes'] . "'>Excluir</button>
+                    </td>";
         echo "</tr>";
+
     }
 } else {
     echo "<tr><td colspan='6'>Nenhum cliente cadastrado.</td></tr>";

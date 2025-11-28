@@ -116,4 +116,16 @@
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+         document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.excluirBtn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const id = this.getAttribute('data-id');
+                    if (confirm("Tem certeza que deseja excluir este livro?")) {
+                        window.location.href = "../backend/deleteCliente.php?id_clientes=" + id;
+                    }
+                });
+            });
+        });
+    </script>
 </body>
