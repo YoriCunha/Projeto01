@@ -1,9 +1,9 @@
 <?php 
 $host="localhost";
-$port=3307;
+$port=3306;
 $socket="";
 $user="root";
-$password="root";
+$password="SqlHome321!";
 $dbname="estoque";
 
 $conexao = mysqli_connect($host, $user, $password, $dbname, $port);

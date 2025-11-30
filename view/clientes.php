@@ -48,7 +48,7 @@
         </div>
         <div class="table-responsive w-100"
             style="border: 1px solid #ccc; border-radius: 1rem; margin-left: 5rem; margin-right: 5rem;">
-            <table class="table text-center">
+            <table class="table text-center" id="tabelaClientes">
                 <caption class="text-center" style="caption-side: top; font-size: 2rem; padding: 1rem;">Clientes
                 </caption>
                 <thead>
@@ -109,6 +109,48 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="clienteModalLabel">Cadastro de Clientes</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="formCliente" action="../backend/updateCliente.php" method="POST" enctype="multipart/form-data">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <input type="hidden" id="idEdit" name="id_clientes">
+                                <label for="nome" class="form-label">Nome:</label>
+                                <input type="text" class="form-control" id="nomeEdit" name="nome" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email:</label>
+                                <input type="email" class="form-control" id="emailEdit" name="email" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="telefone" class="form-label">Telefone:</label>
+                                <input type="text" class="form-control" id="telefoneEdit" name="telefone" required>
+                            </div>
+                            <div class="col-md-9">
+                                <label for="endereco" class="form-label">Endereço:</label>
+                                <input type="text" class="form-control" id="enderecoEdit" name="endereco" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary" name="editclient">Salvar Cliente</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer>
         &copy; 2025 Book Finder. Todos os direitos reservados.
     </footer>
@@ -117,11 +159,41 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabela = document.getElementById('tabelaClientes'); // troque pelo id real da sua tabela
+            if (!tabela) return;
+
+            document.addEventListener("click", function (e) {
+                const btn = e.target.closest(".editarBtn");
+                if (!btn) return;
+
+                const id = btn.getAttribute("data-id");
+
+                // Preenche o ID no formulário
+                document.getElementById("idEdit").value = id;
+
+                // Agora buscamos os dados no banco
+                fetch("../backend/clientLista.php?id=" + id)
+                    .then(r => r.json())
+                    .then(dados => {
+                        
+                        document.getElementById("nomeEdit").value = dados.nome;
+                        document.getElementById("emailEdit").value = dados.email;
+                        document.getElementById("telefoneEdit").value = dados.telefone;
+                        document.getElementById("enderecoEdit").value = dados.endereco;
+
+                        // abre modal
+                        const modal = new bootstrap.Modal(document.getElementById("editarModal"));
+                        modal.show();
+                    })
+                    .catch(err => console.log("ERRO:", err));
+            });
+        });
          document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.excluirBtn').forEach(btn => {
                 btn.addEventListener('click', function () {
                     const id = this.getAttribute('data-id');
-                    if (confirm("Tem certeza que deseja excluir este livro?")) {
+                    if (confirm("Tem certeza que deseja excluir este cliente?")) {
                         window.location.href = "../backend/deleteCliente.php?id_clientes=" + id;
                     }
                 });
